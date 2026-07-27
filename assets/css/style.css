@@ -151,10 +151,19 @@ p:last-child { margin-bottom: 0; }
 
 .portada__grid {
   display: grid;
-  grid-template-columns: 1.25fr .85fr;
+  grid-template-columns: 1.3fr .8fr;
   gap: clamp(2rem, 5vw, 4rem);
   align-items: center;
 }
+
+/* La columna de texto se declara contenedor para poder medirla: así el
+   titular se dimensiona según su ancho real y nunca parte "Clases de
+   inglés y español" en dos, ni se desborda en pantallas estrechas. */
+.portada__texto { container-type: inline-size; }
+
+.portada h1 { font-size: min(7cqi, 3.2rem); }
+
+.nowrap { white-space: nowrap; }
 
 .portada__entradilla {
   font-size: clamp(1.05rem, 2vw, 1.25rem);
@@ -171,7 +180,7 @@ p:last-child { margin-bottom: 0; }
   box-shadow: var(--sombra);
   border: 6px solid #fff;
   margin-inline: auto;
-  max-width: 22rem;
+  max-width: 20rem;
 }
 
 /* Bloque "sobre mí" ------------------------------------------------ */
