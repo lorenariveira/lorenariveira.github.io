@@ -55,19 +55,14 @@
   .tab-content { display: none; padding: 36px 28px 48px; max-width: 820px; margin: 0 auto; }
   .tab-content.active { display: block; }
 
-  .activity-number {
-    font-family: var(--display);
-    font-size: 3.5rem;
-    font-weight: 700;
-    color: var(--amber);
-    line-height: 1;
-  }
+  /* Sin el número delante, el título carga solo con la jerarquía. */
   .activity-title {
-    font-size: 1.25rem;
-    font-weight: 800;
+    font-family: var(--display);
+    font-size: 1.7rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
     color: var(--amber);
-    margin-top: 2px;
-    margin-bottom: 16px;
+    margin: 0 0 18px;
   }
   .activity-instruction {
     font-size: 1rem;
@@ -337,17 +332,16 @@
 <main id="contenido">
 
 <div class="tab-bar" role="tablist">
-  <button class="tab-btn active" role="tab" aria-selected="true" onclick="showTab('act8', this)">8. ¡La cuenta, por favor!</button>
-  <button class="tab-btn" role="tab" aria-selected="false" onclick="showTab('act10', this)">10. Palabras</button>
-  <button class="tab-btn" role="tab" aria-selected="false" onclick="showTab('act13', this)">13. Un sándwich…</button>
+  <button class="tab-btn active" role="tab" aria-selected="true" onclick="showTab('act8', this)">¡La cuenta, por favor!</button>
+  <button class="tab-btn" role="tab" aria-selected="false" onclick="showTab('act10', this)">Palabras</button>
+  <button class="tab-btn" role="tab" aria-selected="false" onclick="showTab('act13', this)">Un sándwich…</button>
 </div>
 
 <!-- ============================================================ -->
 <!--  ACTIVIDAD 8                                                   -->
 <!-- ============================================================ -->
 <div id="act8" class="tab-content active">
-  <div class="activity-number">8.</div>
-  <div class="activity-title">¡La cuenta, por favor!</div>
+  <h2 class="activity-title">¡La cuenta, por favor!</h2>
   <div class="activity-instruction">A. ¿Puedes ordenar este diálogo entre dos clientes y un camarero en un restaurante?<br><small style="font-weight:600;color:var(--gray)">Arrastra las frases para ordenarlas, o usa las flechas ▲▼ de cada una.</small></div>
 
   <div class="tip-box">
@@ -371,8 +365,7 @@
 <!--  ACTIVIDAD 10                                                  -->
 <!-- ============================================================ -->
 <div id="act10" class="tab-content">
-  <div class="activity-number">10.</div>
-  <div class="activity-title">Palabras</div>
+  <h2 class="activity-title">Palabras</h2>
   <div class="activity-instruction">A. Clasifica estas palabras entre los cinco grupos siguientes: <strong>ropa, comida, lugares, muebles</strong> y <strong>partes de una casa</strong>.<br><small style="font-weight:600;color:var(--gray)">Haz clic en una palabra y luego en la categoría donde quieres colocarla.</small></div>
 
   <div class="words-pool" id="wordsPool"></div>
@@ -391,8 +384,7 @@
 <!--  ACTIVIDAD 13                                                  -->
 <!-- ============================================================ -->
 <div id="act13" class="tab-content">
-  <div class="activity-number">13.</div>
-  <div class="activity-title">Un sándwich…</div>
+  <h2 class="activity-title">Un sándwich…</h2>
   <div class="activity-instruction">¿Qué palabras van frecuentemente juntas? Une las palabras de las dos columnas.<br><small style="font-weight:600;color:var(--gray)">Haz clic en una palabra de la izquierda y luego en su pareja de la derecha.</small></div>
 
   <div class="matching-wrapper" id="matchGrid"></div>
