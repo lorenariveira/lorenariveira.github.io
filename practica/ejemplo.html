@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>El presente irregular — Práctica</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+
+<header class="cabecera">
+  <div class="contenedor cabecera__inner">
+    <a class="marca" href="index.html">Práctica<span>Lorena Riveira</span></a>
+    <nav class="nav" aria-label="Navegación">
+      <a href="index.html">Todas las actividades</a>
+    </nav>
+  </div>
+</header>
+
+<main id="contenido">
+
+  <section class="portada portada--simple">
+    <div class="contenedor">
+      <div class="portada__texto">
+        <h1>El presente irregular</h1>
+        <p class="portada__entradilla">Completa cada frase con el verbo entre paréntesis. Nivel A2.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion seccion--alt">
+    <div class="contenedor">
+      <form class="quiz" data-quiz novalidate>
+        <ol class="preguntas">
+
+          <li class="pregunta">
+            <p class="pregunta__texto">Yo <input class="hueco" type="text" autocomplete="off" data-respuesta="tengo" aria-label="Frase 1, verbo tener"> dos hermanas. <span class="pregunta__pista">(tener)</span></p>
+            <p class="pregunta__aviso" data-aviso aria-live="polite"></p>
+          </li>
+
+          <li class="pregunta">
+            <p class="pregunta__texto">¿Tú <input class="hueco" type="text" autocomplete="off" data-respuesta="quieres" aria-label="Frase 2, verbo querer"> un café? <span class="pregunta__pista">(querer)</span></p>
+            <p class="pregunta__aviso" data-aviso aria-live="polite"></p>
+          </li>
+
+          <li class="pregunta">
+            <p class="pregunta__texto">Ella <input class="hueco" type="text" autocomplete="off" data-respuesta="viene" aria-label="Frase 3, verbo venir"> a clase los martes. <span class="pregunta__pista">(venir)</span></p>
+            <p class="pregunta__aviso" data-aviso aria-live="polite"></p>
+          </li>
+
+          <li class="pregunta">
+            <p class="pregunta__texto">Nosotros <input class="hueco" type="text" autocomplete="off" data-respuesta="podemos" aria-label="Frase 4, verbo poder"> ayudarte. <span class="pregunta__pista">(poder)</span></p>
+            <p class="pregunta__aviso" data-aviso aria-live="polite"></p>
+          </li>
+
+          <li class="pregunta">
+            <p class="pregunta__texto">Ellos <input class="hueco" type="text" autocomplete="off" data-respuesta="dicen" aria-label="Frase 5, verbo decir"> que llueve. <span class="pregunta__pista">(decir)</span></p>
+            <p class="pregunta__aviso" data-aviso aria-live="polite"></p>
+          </li>
+
+          <li class="pregunta">
+            <p class="pregunta__texto">Yo no <input class="hueco" type="text" autocomplete="off" data-respuesta="sé" aria-label="Frase 6, verbo saber"> la respuesta. <span class="pregunta__pista">(saber)</span></p>
+            <p class="pregunta__aviso" data-aviso aria-live="polite"></p>
+          </li>
+
+          <li class="pregunta">
+            <p class="pregunta__texto">Vosotros <input class="hueco" type="text" autocomplete="off" data-respuesta="sois" aria-label="Frase 7, verbo ser"> muy amables. <span class="pregunta__pista">(ser)</span></p>
+            <p class="pregunta__aviso" data-aviso aria-live="polite"></p>
+          </li>
+
+          <li class="pregunta">
+            <p class="pregunta__texto">El tren <input class="hueco" type="text" autocomplete="off" data-respuesta="sale" aria-label="Frase 8, verbo salir"> a las ocho. <span class="pregunta__pista">(salir)</span></p>
+            <p class="pregunta__aviso" data-aviso aria-live="polite"></p>
+          </li>
+
+          <li class="pregunta">
+            <p class="pregunta__texto">Yo <input class="hueco" type="text" autocomplete="off" data-respuesta="estoy" aria-label="Frase 9, verbo estar"> en Ámsterdam. <span class="pregunta__pista">(estar)</span></p>
+            <p class="pregunta__aviso" data-aviso aria-live="polite"></p>
+          </li>
+
+          <li class="pregunta">
+            <p class="pregunta__texto">¿Cuánto <input class="hueco" type="text" autocomplete="off" data-respuesta="cuesta" aria-label="Frase 10, verbo costar"> este libro? <span class="pregunta__pista">(costar)</span></p>
+            <p class="pregunta__aviso" data-aviso aria-live="polite"></p>
+          </li>
+
+        </ol>
+
+        <div class="quiz__acciones">
+          <button class="boton" type="submit">Corregir</button>
+          <button class="boton boton--fantasma" type="button" data-reiniciar>Volver a empezar</button>
+        </div>
+
+        <p class="quiz__resultado" data-resultado aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer class="pie">
+  <div class="contenedor pie__inner">
+    <div><p>© 2020–2026 Lorena Riveira</p></div>
+  </div>
+</footer>
+
+<script src="../assets/js/actividad.js" defer></script>
+</body>
+</html>

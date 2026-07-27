@@ -91,6 +91,27 @@ automático (12s) se para al pasar el ratón o al recibir foco, y se apaga **par
 siempre** en cuanto alguien usa una flecha, un punto, las teclas ←/→ o desliza con
 el dedo: quien toma el control no quiere que se lo quiten.
 
+## `practica/` — el aula, no listada
+
+`practica/index.html` es el índice de actividades para estudiantes y
+`practica/<nombre>.html` cada actividad. **Ninguna página pública debe enlazar a
+esta carpeta**: se comparte por enlace directo. Todas llevan
+`<meta name="robots" content="noindex, nofollow">`, y hay que mantenerlo al añadir
+páginas nuevas.
+
+No es una carpeta privada, y no hay que fingir que lo sea: el repositorio es
+público, así que los archivos se ven en GitHub y quien tenga la URL entra. **No
+montes un "login" en JavaScript**: la contraseña viajaría en el código que descarga
+el navegador. Si alguna vez hace falta control de acceso real, la respuesta es
+cambiar de alojamiento o pagar GitHub Pro, no simularlo.
+
+`assets/js/actividad.js` es el motor de las actividades de huecos. Una actividad
+nueva es solo HTML: un `<form data-quiz>`, un `<input data-respuesta="...">` por
+hueco —varias respuestas válidas separadas por `|`— y un `<p data-aviso>` dentro de
+cada `.pregunta`. La corrección ignora mayúsculas y espacios sobrantes, pero
+distingue el fallo de tilde del fallo de palabra y lo dice con otro mensaje y otro
+color. `practica/ejemplo.html` sirve de plantilla.
+
 ## Iconos
 
 Los seis iconos de `clases.html` van en línea en el HTML, con `stroke="currentColor"`

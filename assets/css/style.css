@@ -453,6 +453,82 @@ p:last-child { margin-bottom: 0; }
 .contacto p { max-width: 40ch; margin-inline: auto; color: var(--tinta-suave); }
 .contacto__acciones { display: flex; gap: .75rem; justify-content: center; flex-wrap: wrap; margin-top: 1.75rem; }
 
+/* Práctica: índice de actividades ---------------------------------- */
+.actividad {
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+.actividad h3 { text-align: left; }
+
+.actividad__ir {
+  margin-top: auto;
+  padding-top: .9rem;
+  font-size: .9rem;
+  font-weight: 600;
+  color: var(--terracota-o);
+}
+.actividad__ir::after { content: " →"; }
+
+/* Práctica: actividades de huecos ---------------------------------- */
+.quiz { max-width: 44rem; margin-inline: auto; }
+
+.preguntas {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding-left: 1.6rem;
+}
+
+.pregunta {
+  background: #fff;
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  padding: 1.1rem 1.25rem;
+}
+
+.pregunta__texto { margin: 0; line-height: 2.4; }
+
+.pregunta__pista { color: var(--tinta-suave); font-size: .92rem; font-style: italic; }
+
+.hueco {
+  width: 8.5rem;
+  padding: .3rem .6rem;
+  border: 0;
+  border-bottom: 2px solid var(--borde);
+  border-radius: 4px 4px 0 0;
+  background: var(--crema);
+  font: inherit;
+  color: var(--tinta);
+}
+.hueco:focus { outline: 2px solid var(--terracota); outline-offset: 1px; }
+
+.hueco.es-bien { border-bottom-color: var(--salvia); background: #eef2ec; }
+.hueco.es-casi { border-bottom-color: #c9922f; background: #faf1de; }
+.hueco.es-mal  { border-bottom-color: var(--terracota); background: #fbeae3; }
+
+.pregunta__aviso { margin: .5rem 0 0; font-size: .88rem; font-weight: 500; }
+.pregunta__aviso:empty { display: none; }
+.pregunta__aviso[data-estado="bien"]  { color: #4d6146; }
+.pregunta__aviso[data-estado="casi"]  { color: #8a6318; }
+.pregunta__aviso[data-estado="mal"],
+.pregunta__aviso[data-estado="vacio"] { color: var(--terracota-o); }
+
+.quiz__acciones { display: flex; flex-wrap: wrap; gap: .75rem; justify-content: center; margin-top: 1.75rem; }
+
+.quiz__resultado {
+  margin: 1.25rem 0 0;
+  text-align: center;
+  font-family: var(--display);
+  font-size: 1.2rem;
+}
+.quiz__resultado:empty { display: none; }
+.quiz__resultado[data-estado="bien"] { color: var(--salvia); }
+
 /* Pie -------------------------------------------------------------- */
 .pie {
   border-top: 1px solid var(--borde);
