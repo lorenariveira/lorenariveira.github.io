@@ -174,16 +174,6 @@ p:last-child { margin-bottom: 0; }
   max-width: 22rem;
 }
 
-.etiqueta {
-  display: inline-block;
-  font-size: .72rem;
-  font-weight: 600;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: var(--salvia);
-  margin-bottom: 1rem;
-}
-
 /* Bloque "sobre mí" ------------------------------------------------ */
 .sobre__grid {
   display: grid;
