@@ -163,6 +163,10 @@ p:last-child { margin-bottom: 0; }
 
 .portada h1 { font-size: min(7cqi, 3.2rem); }
 
+/* Portada sin imagen: una sola columna centrada. */
+.portada--simple .portada__texto { max-width: 42rem; margin-inline: auto; text-align: center; }
+.portada--simple .portada__entradilla { max-width: 38ch; margin-inline: auto; }
+
 .nowrap { white-space: nowrap; }
 
 .portada__entradilla {
@@ -221,18 +225,29 @@ p:last-child { margin-bottom: 0; }
   border-radius: var(--radio);
   padding: 1.75rem;
   box-shadow: var(--sombra);
+  transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+}
+
+.tarjeta:hover {
+  transform: translateY(-3px);
+  border-color: #d9c4ad;
+  box-shadow: 0 2px 4px rgb(47 39 35 / .05), 0 14px 32px rgb(47 39 35 / .10);
 }
 
 .tarjeta h3 { color: var(--terracota-o); margin-bottom: .55rem; }
 .tarjeta p { color: var(--tinta-suave); font-size: 1rem; }
 
-.tarjeta__num {
-  display: block;
-  font-family: var(--display);
-  font-size: .9rem;
-  color: var(--salvia);
-  margin-bottom: .6rem;
+.tarjeta__icono {
+  display: grid;
+  place-items: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  margin-bottom: 1.1rem;
+  border-radius: 50%;
+  background: var(--crema-alt);
+  color: var(--terracota);
 }
+.tarjeta__icono svg { width: 1.7rem; height: 1.7rem; }
 
 /* Testimonios ------------------------------------------------------ */
 .titulo-centrado { text-align: center; margin-bottom: 2rem; }
