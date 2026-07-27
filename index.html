@@ -69,11 +69,54 @@
 
   <section class="seccion seccion--alt" aria-labelledby="testimonios">
     <div class="contenedor">
-      <h2 id="testimonios" class="testimonio" style="margin-bottom:2rem">Lo que dicen mis estudiantes</h2>
-      <figure class="testimonio">
-        <blockquote lang="en">Lorena was my Spanish teacher for 2 years (group classes). She is a true professional, skillfully adapting to each student’s aptitudes and needs. She manages to maintain the rhythm of the classes, achieving the objectives while keeping everyone engaged. On a personal note, I will add that Lorena is a very pleasant person!</blockquote>
-        <figcaption>— Micheline T., Francia</figcaption>
-      </figure>
+      <h2 id="testimonios" class="titulo-centrado">Lo que dicen mis estudiantes</h2>
+
+      <div class="carrusel" data-carrusel role="group"
+           aria-roledescription="carrusel" aria-label="Testimonios de estudiantes">
+        <div class="carrusel__ventana">
+          <ul class="carrusel__pista" data-pista>
+
+            <li class="carrusel__slide">
+              <figure class="testimonio">
+                <blockquote lang="en">Lorena was my Spanish teacher for 2 years (group classes). She is a true professional, skillfully adapting to each student’s aptitudes and needs. She manages to maintain the rhythm of the classes, achieving the objectives while keeping everyone engaged. On a personal note, I will add that Lorena is a very pleasant person!</blockquote>
+                <figcaption>Micheline T., France</figcaption>
+              </figure>
+            </li>
+
+            <li class="carrusel__slide">
+              <figure class="testimonio">
+                <blockquote>Cinco minutos me llevó darme cuenta que era LA profe de inglés que estaba buscando. Tomo clases con Lorena hace un poco más de 3 años y fue la mejor decisión que pude haber tomado. Volví de un viaje que me hizo dar cuenta que necesitaba reforzar y re-aprender el inglés básico que había aprendido en la escuela. Paciencia, compromiso y dedicación son las palabras que la describen a Lorena como la mejor profe que vas a conocer. ¡¡Gracias Lorena!!</blockquote>
+                <figcaption>Gabriela T., Argentina</figcaption>
+              </figure>
+            </li>
+
+            <li class="carrusel__slide">
+              <figure class="testimonio">
+                <blockquote lang="en">Lorena helped me overcome the barrier of understanding English to finally be able to speak it with confidence. Her classes are dynamic, entertaining, and she always prepared the classes according to my interests. For several years I studied English, but I'm certain that it was with Lorena's classes that I gained confidence while I never got bored. I totally recommend her.</blockquote>
+                <figcaption>Evelyn L., Netherlands</figcaption>
+              </figure>
+            </li>
+
+            <li class="carrusel__slide">
+              <figure class="testimonio">
+                <blockquote lang="en">My experience with Lorena as an English teacher was excellent. She is a great teacher: responsible, flexible, observant and innovative. In her classes she always looked for the way to integrate methodologies and pedagogical tools that adapt to my needs. It was a great learning experience!</blockquote>
+                <figcaption>Juan G., Argentina</figcaption>
+              </figure>
+            </li>
+
+          </ul>
+        </div>
+
+        <div class="carrusel__controles">
+          <button class="carrusel__flecha" type="button" data-anterior aria-label="Testimonio anterior">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="carrusel__puntos" data-puntos></div>
+          <button class="carrusel__flecha" type="button" data-siguiente aria-label="Testimonio siguiente">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -105,5 +148,6 @@
   </div>
 </footer>
 
+<script src="assets/js/carrusel.js" defer></script>
 </body>
 </html>
