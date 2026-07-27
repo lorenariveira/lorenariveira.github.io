@@ -3,7 +3,7 @@
    "carrusel--activo" es la que convierte esa lista en un carrusel, así que la
    página nunca deja contenido inaccesible. */
 
-const INTERVALO = 8000;   // ms entre testimonios
+const INTERVALO = 12000;  // ms entre testimonios
 const UMBRAL_ARRASTRE = 45; // px mínimos para contar como deslizamiento
 
 document.querySelectorAll('[data-carrusel]').forEach(iniciar);
