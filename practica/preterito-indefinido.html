@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Pretérito indefinido — Práctica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../assets/css/style.css">
+<style>
+  /* Los nombres de variables son los del original; solo cambian los valores,
+     que ahora son los del sitio. Así el diseño encaja sin tocar las reglas. */
+  :root {
+    --ink: #2f2723;
+    --cream: #fbf6f0;
+    --accent: #b85c38;
+    --accent-light: #f3ddd1;
+    --gold: #dda37f;
+    --success: #5d7355;
+    --success-light: #eef2ec;
+    --error: #9c4a2b;
+    --error-light: #fbeae3;
+    --muted: #6b5d54;
+    --border: #e6d8c9;
+    --card: #ffffff;
+  }
+
+  .exercise *, .score-bar *, .exercise, .score-bar { box-sizing: border-box; }
+
+  /* Barra de puntuación: pegada bajo la cabecera del sitio, en claro. */
+  .score-bar {
+    background: var(--crema-alt);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 40;
+  }
+  .score-pill {
+    background: #fff;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 20px;
+  }
+  .score-pill span { font-weight: 700; font-size: 15px; color: var(--accent); }
+  .reset-btn {
+    margin-left: auto;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s;
+  }
+  .reset-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+  main {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 48px 24px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .exercise {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 16px rgba(26,26,46,0.06);
+    transition: box-shadow 0.3s;
+  }
+  .exercise:hover { box-shadow: 0 4px 28px rgba(26,26,46,0.1); }
+
+  .exercise-header {
+    background: var(--ink);
+    padding: 20px 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .exercise-number {
+    font-family: var(--display);
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    min-width: 36px;
+  }
+  .exercise-title { font-size: 15px; font-weight: 500; color: var(--cream); letter-spacing: 0.3px; }
+  .exercise-context { font-size: 12px; color: rgba(245,240,232,0.5); margin-top: 3px; font-style: italic; }
+
+  .exercise-body { padding: 28px; }
+
+  .blank-item {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+  .blank-item:last-child { margin-bottom: 0; }
+  .item-num { font-size: 12px; font-weight: 700; color: var(--muted); min-width: 18px; }
+  .item-text { font-size: 15px; line-height: 1.6; color: var(--ink); flex: 1; }
+  .item-hint { font-size: 13px; color: var(--muted); font-style: italic; }
+
+  .answer-input {
+    font-family: var(--texto);
+    font-size: 15px;
+    font-weight: 500;
+    border: none;
+    border-bottom: 2px solid var(--border);
+    background: transparent;
+    padding: 2px 6px 4px;
+    width: 130px;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.2s;
+    text-align: center;
+  }
+  .answer-input:focus { border-bottom-color: var(--accent); }
+  .answer-input.correct { border-bottom-color: var(--success); background: var(--success-light); border-radius: 4px 4px 0 0; color: var(--success); }
+  .answer-input.wrong { border-bottom-color: var(--error); background: var(--error-light); border-radius: 4px 4px 0 0; color: var(--error); }
+
+  .feedback-msg { font-size: 12px; margin-top: 4px; display: none; font-weight: 500; }
+  .feedback-msg.show { display: block; }
+  .feedback-msg.correct { color: var(--success); }
+  .feedback-msg.wrong { color: var(--error); }
+
+  .mc-item { margin-bottom: 20px; }
+  .mc-item:last-child { margin-bottom: 0; }
+  .mc-sentence { font-size: 15px; margin-bottom: 10px; color: var(--ink); line-height: 1.6; }
+  .mc-options { display: flex; gap: 10px; flex-wrap: wrap; }
+  .mc-btn {
+    font-family: var(--texto);
+    font-size: 14px; font-weight: 500;
+    padding: 8px 20px; border-radius: 8px;
+    border: 2px solid var(--border); background: var(--cream); color: var(--ink);
+    cursor: pointer; transition: all 0.18s;
+  }
+  .mc-btn:hover:not(:disabled) { border-color: var(--accent); background: var(--accent-light); }
+  .mc-btn.selected-correct { border-color: var(--success); background: var(--success-light); color: var(--success); }
+  .mc-btn.selected-wrong { border-color: var(--error); background: var(--error-light); color: var(--error); }
+  .mc-btn.reveal-correct { border-color: var(--success); background: var(--success-light); color: var(--success); opacity: 0.55; }
+  .mc-btn:disabled { cursor: default; }
+
+  .dialog-box { background: var(--cream); border: 1px solid var(--border); border-radius: 12px; padding: 24px; }
+  .dialog-line { display: flex; align-items: baseline; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
+  .dialog-line:last-child { margin-bottom: 0; }
+  .dialog-speaker { font-size: 12px; letter-spacing: 1px; text-transform: uppercase; font-weight: 700; min-width: 16px; color: var(--muted); }
+  .dialog-dash { color: var(--muted); font-size: 16px; }
+  .dialog-text { font-size: 15px; line-height: 1.7; flex: 1; }
+
+  .drag-container { display: flex; flex-direction: column; gap: 12px; }
+  .drag-source-pool { display: flex; flex-wrap: wrap; gap: 10px; padding: 16px; background: var(--cream); border: 2px dashed var(--border); border-radius: 10px; min-height: 60px; }
+  .drag-target-list { display: flex; flex-direction: column; gap: 8px; }
+  .drag-slot { display: flex; align-items: center; gap: 12px; padding: 10px 14px; background: var(--cream); border: 1px solid var(--border); border-radius: 8px; min-height: 48px; }
+  .drag-slot-num { font-size: 13px; font-weight: 700; color: var(--muted); min-width: 20px; }
+  .drag-slot-content { flex: 1; font-size: 14px; color: var(--muted); font-style: italic; }
+  .drag-slot.filled .drag-slot-content { color: var(--ink); font-style: normal; }
+  .drag-slot.correct-slot { border-color: var(--success); background: var(--success-light); }
+  .drag-slot.wrong-slot { border-color: var(--error); background: var(--error-light); }
+  .drag-card { background: var(--ink); color: var(--cream); font: inherit; font-size: 13px; padding: 8px 14px; border: 0; border-radius: 8px; cursor: grab; user-select: none; text-align: left; transition: transform 0.15s, opacity 0.15s; }
+  .drag-card:active { cursor: grabbing; transform: scale(1.04); }
+  .drag-card.dragging { opacity: 0.4; }
+  .drag-card.elegida { outline: 3px solid var(--accent); outline-offset: 2px; transform: scale(1.03); }
+  .drag-slot { cursor: pointer; }
+
+  .check-area { padding: 0 28px 28px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .check-btn {
+    font-family: var(--texto);
+    font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+    padding: 12px 28px; border-radius: 8px; border: none;
+    background: var(--ink); color: var(--cream); cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+  }
+  .check-btn:hover { background: var(--accent); }
+  .check-btn:active { transform: scale(0.98); }
+  .check-result { font-size: 14px; font-weight: 600; }
+  .check-result.good { color: var(--success); }
+  .check-result.bad { color: var(--error); }
+
+  .tilde-note { background: rgba(212,168,71,0.1); border-left: 3px solid var(--gold); border-radius: 0 8px 8px 0; padding: 10px 16px; margin: 0 28px 24px; font-size: 13px; color: var(--muted); }
+  .tilde-note strong { color: var(--ink); }
+
+  .special-chars { display: flex; gap: 6px; flex-wrap: wrap; padding: 0 28px 20px; }
+  .char-btn { font-family: var(--texto); font-size: 15px; font-weight: 600; padding: 5px 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--cream); cursor: pointer; transition: all 0.15s; color: var(--ink); }
+  .char-btn:hover { background: var(--accent-light); border-color: var(--accent); }
+  .char-label { font-size: 12px; color: var(--muted); padding: 6px 4px; align-self: center; }
+
+  @media (max-width: 600px) {
+    header { padding: 36px 20px 28px; }
+    .score-bar { padding: 12px 20px; }
+    main { padding: 32px 14px 0; }
+    .exercise-body, .check-area { padding-left: 20px; padding-right: 20px; }
+    .tilde-note, .special-chars { margin-left: 20px; margin-right: 20px; }
+    .answer-input { width: 110px; }
+  }
+</style>
+</head>
+<body>
+
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+
+<header class="cabecera">
+  <div class="contenedor cabecera__inner">
+    <a class="marca" href="index.html">Práctica<span>Lorena Riveira</span></a>
+    <nav class="nav" aria-label="Navegación">
+      <a href="index.html">Todas las actividades</a>
+    </nav>
+  </div>
+</header>
+
+<section class="portada portada--simple">
+  <div class="contenedor">
+    <div class="portada__texto">
+      <h1>Pretérito indefinido</h1>
+      <p class="portada__entradilla">Cinco ejercicios en contexto de oficina y tecnología.</p>
+    </div>
+  </div>
+</section>
+
+<div class="score-bar">
+  <div class="score-pill">Puntuación: <span id="score">0</span> / <span id="total">0</span></div>
+  <button class="reset-btn" onclick="resetAll()">↺ Reiniciar</button>
+</div>
+
+<main id="contenido">
+
+  <div class="exercise" id="ex1">
+    <div class="exercise-header">
+      <div class="exercise-number">1</div>
+      <div class="exercise-info">
+        <div class="exercise-title">Completa las frases</div>
+        <div class="exercise-context">Primer día en una empresa tech</div>
+      </div>
+    </div>
+    <div class="special-chars">
+      <span class="char-label">Insertar:</span>
+      <button class="char-btn" onclick="insertChar('á')">á</button>
+      <button class="char-btn" onclick="insertChar('é')">é</button>
+      <button class="char-btn" onclick="insertChar('í')">í</button>
+      <button class="char-btn" onclick="insertChar('ó')">ó</button>
+      <button class="char-btn" onclick="insertChar('ú')">ú</button>
+      <button class="char-btn" onclick="insertChar('ñ')">ñ</button>
+    </div>
+    <div class="tilde-note"><strong>⚠ Las tildes son obligatorias.</strong> Escribe con acento: <em>llegó</em>, no <em>llego</em>.</div>
+    <div class="exercise-body" id="ex1-body"></div>
+    <div class="check-area">
+      <button class="check-btn" onclick="checkFill('ex1')">Comprobar</button>
+      <span class="check-result" id="ex1-result"></span>
+    </div>
+  </div>
+
+  <div class="exercise" id="ex2">
+    <div class="exercise-header">
+      <div class="exercise-number">2</div>
+      <div class="exercise-info">
+        <div class="exercise-title">Opción múltiple</div>
+        <div class="exercise-context">Soporte técnico</div>
+      </div>
+    </div>
+    <div class="exercise-body" id="ex2-body"></div>
+    <div class="check-area">
+      <button class="check-btn" onclick="checkMC()">Comprobar</button>
+      <span class="check-result" id="ex2-result"></span>
+    </div>
+  </div>
+
+  <div class="exercise" id="ex3">
+    <div class="exercise-header">
+      <div class="exercise-number">3</div>
+      <div class="exercise-info">
+        <div class="exercise-title">Completa el diálogo</div>
+        <div class="exercise-context">Conversación en la oficina</div>
+      </div>
+    </div>
+    <div class="special-chars">
+      <span class="char-label">Insertar:</span>
+      <button class="char-btn" onclick="insertChar('á')">á</button>
+      <button class="char-btn" onclick="insertChar('é')">é</button>
+      <button class="char-btn" onclick="insertChar('í')">í</button>
+      <button class="char-btn" onclick="insertChar('ó')">ó</button>
+      <button class="char-btn" onclick="insertChar('ú')">ú</button>
+      <button class="char-btn" onclick="insertChar('ñ')">ñ</button>
+    </div>
+    <div class="tilde-note"><strong>⚠ Las tildes son obligatorias.</strong> Escribe con acento donde corresponda.</div>
+    <div class="exercise-body" id="ex3-body"></div>
+    <div class="check-area">
+      <button class="check-btn" onclick="checkFill('ex3')">Comprobar</button>
+      <span class="check-result" id="ex3-result"></span>
+    </div>
+  </div>
+
+  <div class="exercise" id="ex4">
+    <div class="exercise-header">
+      <div class="exercise-number">4</div>
+      <div class="exercise-info">
+        <div class="exercise-title">Ordena la historia</div>
+        <div class="exercise-context">Día de trabajo remoto</div>
+      </div>
+    </div>
+    <div class="exercise-body" id="ex4-body"></div>
+    <div class="check-area">
+      <button class="check-btn" onclick="checkOrder()">Comprobar</button>
+      <span class="check-result" id="ex4-result"></span>
+    </div>
+  </div>
+
+  <div class="exercise" id="ex5">
+    <div class="exercise-header">
+      <div class="exercise-number">5</div>
+      <div class="exercise-info">
+        <div class="exercise-title">Escribe la forma correcta</div>
+        <div class="exercise-context">Lanzamiento de una app</div>
+      </div>
+    </div>
+    <div class="special-chars">
+      <span class="char-label">Insertar:</span>
+      <button class="char-btn" onclick="insertChar('á')">á</button>
+      <button class="char-btn" onclick="insertChar('é')">é</button>
+      <button class="char-btn" onclick="insertChar('í')">í</button>
+      <button class="char-btn" onclick="insertChar('ó')">ó</button>
+      <button class="char-btn" onclick="insertChar('ú')">ú</button>
+      <button class="char-btn" onclick="insertChar('ñ')">ñ</button>
+    </div>
+    <div class="tilde-note"><strong>⚠ Las tildes son obligatorias.</strong> Escribe con acento donde corresponda.</div>
+    <div class="exercise-body" id="ex5-body"></div>
+    <div class="check-area">
+      <button class="check-btn" onclick="checkFill('ex5')">Comprobar</button>
+      <span class="check-result" id="ex5-result"></span>
+    </div>
+  </div>
+
+</main>
+
+<footer class="pie">
+  <div class="contenedor pie__inner">
+    <div><p>© 2020–2026 Lorena Riveira</p></div>
+  </div>
+</footer>
+
+<script>
+const ex1Data = [
+  { before: "Ayer Ana", answer: "llegó", after: "a la oficina a las 9:00.", hint: "(llegar)" },
+  { before: "Primero, ella", answer: "habló", after: "con el equipo de IT.", hint: "(hablar)" },
+  { before: "Después,", answer: "creó", after: "su cuenta en el sistema.", hint: "(crear)" },
+  { before: "El jefe le", answer: "dio", after: "una laptop nueva.", hint: "(dar)" },
+  { before: "Ana", answer: "escribió", after: "su primer mensaje en Slack.", hint: "(escribir)" },
+  { before: "Por la tarde, ella", answer: "tuvo", after: "una reunión con el equipo.", hint: "(tener)" },
+];
+
+const ex2Data = [
+  { sentence: "El cliente ______ un problema con la app.", options: [{ label: "tiene", correct: false }, { label: "tuvo", correct: true }] },
+  { sentence: "Yo ______ el error en cinco minutos.", options: [{ label: "solucioné", correct: true }, { label: "soluciono", correct: false }] },
+  { sentence: "Nosotros ______ un email al cliente.", options: [{ label: "enviamos (presente)", correct: false }, { label: "enviamos (indefinido)", correct: true }] },
+  { sentence: "El cliente ______ muy contento.", options: [{ label: "está", correct: false }, { label: "estuvo", correct: true }] },
+];
+
+const ex3Data = [
+  { speaker: "A", before: "— Hola, ¿qué", answer: "hiciste", after: "ayer?", hint: "(hacer)" },
+  { speaker: "B", before: "— Yo", answer: "trabajé", after: "en un proyecto nuevo.", hint: "(trabajar)" },
+  { speaker: "A", before: "— ¿Y", answer: "terminaste", after: "el proyecto?", hint: "(terminar)" },
+  { speaker: "B", before: "— Sí, lo", answer: "terminé", after: "por la tarde. Después", hint: "(terminar)" },
+  { speaker: "B", before: "", answer: "salí", after: "con unos compañeros.", hint: "(salir)" },
+  { speaker: "A", before: "— ¡Qué bien! Yo no", answer: "salí", after: ", yo", hint: "(salir)" },
+  { speaker: "A", before: "", answer: "me quedé", after: "en casa.", hint: "(quedarse)" },
+];
+
+const ex4Sentences = [
+  "b) Ayer, Carlos se despertó a las 8:00.",
+  "d) Primero, preparó café y abrió su laptop.",
+  "a) Después, tuvo una videollamada con su equipo.",
+  "c) Por la tarde, terminó su tarea.",
+];
+const ex4CorrectOrder = ["b)", "d)", "a)", "c)"];
+
+const ex5Data = [
+  { before: "El equipo", answer: "lanzó", after: "la app el lunes.", hint: "(lanzar)" },
+  { before: "Muchos usuarios", answer: "descargaron", after: "la app.", hint: "(descargar)" },
+  { before: "Nosotros", answer: "recibimos", after: "buenos comentarios.", hint: "(recibir)" },
+  { before: "El equipo de diseño", answer: "hizo", after: "cambios rápidos.", hint: "(hacer)" },
+  { before: "Finalmente, la empresa", answer: "ganó", after: "nuevos clientes.", hint: "(ganar)" },
+];
+
+let lastFocused = null;
+const mcSelected = {};
+const mcDone = {};
+
+document.addEventListener('focusin', e => {
+  if (e.target.classList.contains('answer-input')) lastFocused = e.target;
+});
+
+function insertChar(ch) {
+  if (!lastFocused) return;
+  const inp = lastFocused;
+  const start = inp.selectionStart;
+  const end = inp.selectionEnd;
+  inp.value = inp.value.slice(0, start) + ch + inp.value.slice(end);
+  inp.selectionStart = inp.selectionEnd = start + 1;
+  inp.focus();
+}
+
+function buildFill(containerId, data, isDialog) {
+  const body = document.getElementById(containerId + '-body');
+  if (isDialog) {
+    const box = document.createElement('div');
+    box.className = 'dialog-box';
+    data.forEach((item, i) => {
+      const line = document.createElement('div');
+      line.className = 'dialog-line';
+      line.innerHTML = `
+        <span class="dialog-speaker">${item.speaker}</span>
+        <span class="dialog-dash">—</span>
+        <span class="dialog-text">
+          ${item.before ? item.before + ' ' : ''}
+          <input class="answer-input" type="text" id="${containerId}-inp-${i}" data-answer="${item.answer}" placeholder="…" autocomplete="off" autocorrect="off" spellcheck="false">
+          ${item.after}
+          <span class="item-hint">${item.hint}</span>
+          <br><span class="feedback-msg" id="${containerId}-fb-${i}"></span>
+        </span>`;
+      box.appendChild(line);
+    });
+    body.appendChild(box);
+  } else {
+    data.forEach((item, i) => {
+      const div = document.createElement('div');
+      div.className = 'blank-item';
+      div.innerHTML = `
+        <span class="item-num">${i + 1}.</span>
+        <span class="item-text">
+          ${item.before}
+          <input class="answer-input" type="text" id="${containerId}-inp-${i}" data-answer="${item.answer}" placeholder="…" autocomplete="off" autocorrect="off" spellcheck="false">
+          ${item.after}
+          <span class="item-hint">${item.hint}</span>
+          <br><span class="feedback-msg" id="${containerId}-fb-${i}"></span>
+        </span>`;
+      body.appendChild(div);
+    });
+  }
+}
+
+function buildMC() {
+  const body = document.getElementById('ex2-body');
+  ex2Data.forEach((item, i) => {
+    const div = document.createElement('div');
+    div.className = 'mc-item';
+    const opts = item.options.map((o, j) =>
+      `<button class="mc-btn" id="ex2-mc-${i}-${j}" onclick="selectMC(${i},${j},${o.correct})">${o.label}</button>`
+    ).join('');
+    div.innerHTML = `<div class="mc-sentence"><strong>${i+1}.</strong> ${item.sentence}</div><div class="mc-options" id="ex2-mc-${i}">${opts}</div>`;
+    body.appendChild(div);
+  });
+}
+
+function buildOrder() {
+  const body = document.getElementById('ex4-body');
+  body.innerHTML = `<div class="drag-container">
+    <p style="font-size:13px;color:var(--muted);margin-bottom:10px;">Arrastra las frases al orden correcto, o toca una frase y luego su hueco:</p>
+    <div class="drag-source-pool" id="source-pool"></div>
+    <div class="drag-target-list" id="target-list"></div>
+  </div>`;
+
+  const shuffled = [...ex4Sentences].sort(() => Math.random() - 0.5);
+  const pool = document.getElementById('source-pool');
+  shuffled.forEach(s => pool.appendChild(createCard(s)));
+
+  const targetList = document.getElementById('target-list');
+  for (let i = 0; i < 4; i++) {
+    const slot = document.createElement('div');
+    slot.className = 'drag-slot';
+    slot.id = `slot-${i}`;
+    slot.dataset.index = i;
+    slot.innerHTML = `<span class="drag-slot-num">${i + 1}.</span><span class="drag-slot-content">Suelta aquí...</span>`;
+    addDropEvents(slot);
+    targetList.appendChild(slot);
+  }
+}
+
+/* Arrastrar y soltar de HTML5 no existe en pantallas táctiles, así que las
+   tarjetas también se pueden tocar para seleccionarlas y luego tocar el hueco.
+   Son botones, de modo que funciona igual con el teclado. */
+let draggedCard = null;
+let cartaElegida = null;
+
+function elegirCarta(card) {
+  if (cartaElegida === card) { cartaElegida = null; card.classList.remove('elegida'); return; }
+  document.querySelectorAll('.drag-card.elegida').forEach(c => c.classList.remove('elegida'));
+  cartaElegida = card;
+  card.classList.add('elegida');
+}
+
+function colocarEnHueco(slot, card) {
+  const anterior = slot.dataset.cardText;
+  if (anterior) document.getElementById('source-pool').appendChild(createCard(anterior));
+  if (card.parentNode) card.parentNode.removeChild(card);
+  slot.dataset.cardText = card.dataset.text;
+  slot.classList.add('filled');
+  slot.querySelector('.drag-slot-content').textContent = card.dataset.text;
+  cartaElegida = null;
+}
+
+function createCard(text) {
+  const card = document.createElement('button');
+  card.type = 'button';
+  card.className = 'drag-card';
+  card.draggable = true;
+  card.textContent = text;
+  card.dataset.text = text;
+  card.addEventListener('dragstart', () => { draggedCard = card; setTimeout(() => card.classList.add('dragging'), 0); });
+  card.addEventListener('dragend', () => { card.classList.remove('dragging'); draggedCard = null; });
+  card.addEventListener('click', () => elegirCarta(card));
+  return card;
+}
+
+function addDropEvents(slot) {
+  slot.addEventListener('dragover', e => { e.preventDefault(); slot.style.outline = '2px dashed var(--accent)'; });
+  slot.addEventListener('dragleave', () => { slot.style.outline = ''; });
+  slot.addEventListener('drop', e => {
+    e.preventDefault();
+    slot.style.outline = '';
+    if (!draggedCard) return;
+    colocarEnHueco(slot, draggedCard);
+  });
+  slot.addEventListener('click', () => {
+    if (!cartaElegida) return;
+    cartaElegida.classList.remove('elegida');
+    colocarEnHueco(slot, cartaElegida);
+  });
+}
+
+function selectMC(itemIdx, optIdx, isCorrect) {
+  if (mcDone[itemIdx]) return;
+  mcSelected[itemIdx] = { optIdx, isCorrect };
+  const group = document.getElementById(`ex2-mc-${itemIdx}`);
+  group.querySelectorAll('.mc-btn').forEach(b => b.classList.remove('selected-correct','selected-wrong'));
+  document.getElementById(`ex2-mc-${itemIdx}-${optIdx}`).classList.add(isCorrect ? 'selected-correct' : 'selected-wrong');
+}
+
+function removeTildes(str) {
+  return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+}
+
+function normalize(str) { return str.trim().toLowerCase(); }
+
+function checkFill(exId) {
+  const inputs = document.querySelectorAll(`#${exId}-body .answer-input`);
+  let correct = 0;
+  inputs.forEach((inp, i) => {
+    const fb = document.getElementById(`${exId}-fb-${i}`);
+    const expected = inp.dataset.answer;
+    const userVal = normalize(inp.value);
+    inp.classList.remove('correct', 'wrong');
+    fb.classList.remove('show', 'correct', 'wrong');
+    if (userVal === '') return;
+    if (userVal === normalize(expected)) {
+      inp.classList.add('correct');
+      fb.textContent = '✓ Correcto';
+      fb.classList.add('show', 'correct');
+      correct++;
+    } else {
+      inp.classList.add('wrong');
+      const withoutTilde = removeTildes(userVal);
+      const expectedWithout = removeTildes(normalize(expected));
+      fb.textContent = withoutTilde === expectedWithout
+        ? `✗ Falta la tilde → ${expected}`
+        : `✗ Respuesta correcta: ${expected}`;
+      fb.classList.add('show', 'wrong');
+    }
+  });
+  const filled = Array.from(inputs).filter(i => i.value.trim() !== '').length;
+  const resultEl = document.getElementById(`${exId}-result`);
+  resultEl.textContent = `${correct} / ${filled} correctas`;
+  resultEl.className = 'check-result ' + (correct === inputs.length ? 'good' : 'bad');
+  updateScore();
+}
+
+function checkMC() {
+  let correct = 0;
+  ex2Data.forEach((item, i) => {
+    const sel = mcSelected[i];
+    if (!sel) return;
+    mcDone[i] = true;
+    document.getElementById(`ex2-mc-${i}`).querySelectorAll('.mc-btn').forEach(b => b.disabled = true);
+    if (sel.isCorrect) { correct++; }
+    else { item.options.forEach((o, j) => { if (o.correct) document.getElementById(`ex2-mc-${i}-${j}`).classList.add('reveal-correct'); }); }
+  });
+  const answered = Object.keys(mcSelected).length;
+  const resultEl = document.getElementById('ex2-result');
+  resultEl.textContent = `${correct} / ${answered} correctas`;
+  resultEl.className = 'check-result ' + (correct === ex2Data.length ? 'good' : 'bad');
+  updateScore();
+}
+
+function checkOrder() {
+  let correct = 0;
+  for (let i = 0; i < 4; i++) {
+    const slot = document.getElementById(`slot-${i}`);
+    const cardText = slot.dataset.cardText || '';
+    slot.classList.remove('correct-slot', 'wrong-slot');
+    if (cardText.startsWith(ex4CorrectOrder[i])) { slot.classList.add('correct-slot'); correct++; }
+    else if (cardText) { slot.classList.add('wrong-slot'); }
+  }
+  const resultEl = document.getElementById('ex4-result');
+  resultEl.textContent = `${correct} / 4 correctas`;
+  resultEl.className = 'check-result ' + (correct === 4 ? 'good' : 'bad');
+  updateScore();
+}
+
+function updateScore() {
+  let s = 0, t = 0;
+  ['ex1','ex3','ex5'].forEach(id => {
+    document.querySelectorAll(`#${id}-body .answer-input`).forEach(inp => {
+      if (inp.value.trim()) { t++; if (inp.classList.contains('correct')) s++; }
+    });
+  });
+  ex2Data.forEach((_, i) => { const sel = mcSelected[i]; if (sel) { t++; if (sel.isCorrect) s++; } });
+  if (document.getElementById('ex4-result').textContent) {
+    for (let i = 0; i < 4; i++) {
+      const slot = document.getElementById(`slot-${i}`);
+      if (slot && slot.dataset.cardText) { t++; if (slot.classList.contains('correct-slot')) s++; }
+    }
+  }
+  document.getElementById('score').textContent = s;
+  document.getElementById('total').textContent = t;
+}
+
+function resetAll() {
+  document.querySelectorAll('.answer-input').forEach(inp => { inp.value = ''; inp.classList.remove('correct','wrong'); });
+  document.querySelectorAll('.feedback-msg').forEach(fb => { fb.textContent = ''; fb.classList.remove('show','correct','wrong'); });
+  document.querySelectorAll('.mc-btn').forEach(btn => { btn.className = 'mc-btn'; btn.disabled = false; });
+  Object.keys(mcSelected).forEach(k => delete mcSelected[k]);
+  Object.keys(mcDone).forEach(k => delete mcDone[k]);
+  document.querySelectorAll('.check-result').forEach(el => el.textContent = '');
+  document.getElementById('score').textContent = '0';
+  document.getElementById('total').textContent = '0';
+  document.getElementById('ex4-body').innerHTML = '';
+  buildOrder();
+}
+
+buildFill('ex1', ex1Data, false);
+buildMC();
+buildFill('ex3', ex3Data, true);
+buildOrder();
+buildFill('ex5', ex5Data, false);
+</script>
+</body>
+</html>

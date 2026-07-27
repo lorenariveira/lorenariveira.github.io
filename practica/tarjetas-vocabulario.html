@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Tarjetas de vocabulario — Práctica</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../assets/css/style.css">
+
+<style>
+  /* El azul y el verde no son decorativos: distinguen el género gramatical,
+     así que se mantienen aunque el resto del sitio sea terracota. */
+  :root {
+    --masculino: #2f6690;
+    --masculino-fondo: #e7eff5;
+    --femenino: #4f6b47;
+    --femenino-fondo: #e9efe7;
+  }
+
+  .rejilla-tarjetas {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 12px;
+    margin-top: 1.5rem;
+  }
+
+  .tarjeta-palabra {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-height: 110px;
+    padding: 1rem .75rem;
+    background: #fff;
+    border: 1px solid var(--borde);
+    border-top: 3px solid transparent;
+    border-radius: var(--radio);
+    font: inherit;
+    cursor: pointer;
+    user-select: none;
+    transition: transform .15s ease, border-color .15s ease;
+  }
+  .tarjeta-palabra:hover { transform: translateY(-2px); border-color: #cdbaa6; }
+
+  .tarjeta-palabra.revelada.el { border-top-color: var(--masculino); }
+  .tarjeta-palabra.revelada.la { border-top-color: var(--femenino); }
+
+  .tarjeta-palabra .dibujo { font-size: 2.25rem; line-height: 1; }
+
+  .tarjeta-palabra .etiqueta {
+    opacity: 0;
+    transition: opacity .2s ease;
+    min-height: 1.4rem;
+  }
+  .tarjeta-palabra.revelada .etiqueta { opacity: 1; }
+
+  .distintivo {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: .78rem;
+    font-weight: 600;
+  }
+  .distintivo.el { background: var(--masculino-fondo); color: var(--masculino); }
+  .distintivo.la { background: var(--femenino-fondo); color: var(--femenino); }
+
+  .leyenda { display: flex; gap: 1.25rem; flex-wrap: wrap; justify-content: center; margin-bottom: 1.25rem; }
+  .leyenda div { display: flex; align-items: center; gap: .5rem; font-size: .88rem; color: var(--tinta-suave); }
+  .leyenda i { width: 12px; height: 12px; border-radius: 50%; }
+
+  .mandos { display: flex; gap: .6rem; flex-wrap: wrap; justify-content: center; }
+
+  .mando {
+    padding: .45rem 1rem;
+    border-radius: 999px;
+    border: 1px solid var(--borde);
+    background: transparent;
+    color: var(--tinta);
+    font: inherit;
+    font-size: .88rem;
+    cursor: pointer;
+    transition: background .15s ease, border-color .15s ease;
+  }
+  .mando:hover { background: var(--crema-alt); border-color: #cdbaa6; }
+
+  .aviso { font-size: .85rem; color: var(--tinta-suave); text-align: center; margin-top: 1.5rem; }
+</style>
+</head>
+<body>
+
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+
+<header class="cabecera">
+  <div class="contenedor cabecera__inner">
+    <a class="marca" href="index.html">Práctica<span>Lorena Riveira</span></a>
+    <nav class="nav" aria-label="Navegación">
+      <a href="index.html">Todas las actividades</a>
+    </nav>
+  </div>
+</header>
+
+<main id="contenido">
+
+  <section class="portada portada--simple">
+    <div class="contenedor">
+      <div class="portada__texto">
+        <h1>Tarjetas de vocabulario</h1>
+        <p class="portada__entradilla">Mira el dibujo y di la palabra con su artículo antes de destaparla.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion seccion--alt">
+    <div class="contenedor">
+
+      <div class="leyenda">
+        <div><i style="background: var(--masculino)"></i> EL — masculino</div>
+        <div><i style="background: var(--femenino)"></i> LA — femenino</div>
+      </div>
+
+      <div class="mandos">
+        <button class="mando" type="button" data-mostrar>Mostrar todo</button>
+        <button class="mando" type="button" data-ocultar>Ocultar todo</button>
+        <button class="mando" type="button" data-mezclar>Mezclar ↺</button>
+      </div>
+
+      <div class="rejilla-tarjetas" id="rejilla"></div>
+
+      <p class="aviso">Toca una tarjeta para revelar la palabra y su artículo.</p>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="pie">
+  <div class="contenedor pie__inner">
+    <div><p>© 2020–2026 Lorena Riveira</p></div>
+  </div>
+</footer>
+
+<script>
+const palabras = [
+  {w:"libro",        icon:"📖",  g:"el"},
+  {w:"mesa",         icon:"🍽️",  g:"la"},
+  {w:"bolígrafo",    icon:"🖊️",  g:"el"},
+  {w:"silla",        icon:"🪑",  g:"la"},
+  {w:"café",         icon:"☕",  g:"el"},
+  {w:"ventana",      icon:"🪟",  g:"la"},
+  {w:"teléfono",     icon:"📱",  g:"el"},
+  {w:"puerta",       icon:"🚪",  g:"la"},
+  {w:"zapato",       icon:"👟",  g:"el"},
+  {w:"mochila",      icon:"🎒",  g:"la"},
+  {w:"trabajo",      icon:"💼",  g:"el"},
+  {w:"clase",        icon:"🏫",  g:"la"},
+  {w:"número",       icon:"🔢",  g:"el"},
+  {w:"ciudad",       icon:"🏙️",  g:"la"},
+  {w:"periódico",    icon:"📰",  g:"el"},
+  {w:"revista",      icon:"📗",  g:"la"},
+  {w:"banco",        icon:"🏦",  g:"el"},
+  {w:"tienda",       icon:"🛒",  g:"la"},
+  {w:"supermercado", icon:"🏪",  g:"el"},
+  {w:"palabra",      icon:"💬",  g:"la"},
+];
+
+const rejilla = document.getElementById('rejilla');
+let orden = [...palabras];
+
+function pintar() {
+  rejilla.innerHTML = '';
+  orden.forEach((item) => {
+    const tarjeta = document.createElement('button');
+    tarjeta.type = 'button';
+    tarjeta.className = `tarjeta-palabra ${item.g}`;
+    /* El nombre accesible no revela la respuesta: quien use lector de
+       pantalla oye el dibujo, no la palabra, igual que quien la ve. */
+    tarjeta.setAttribute('aria-label', 'Tarjeta de vocabulario. Tócala para ver la palabra.');
+    tarjeta.innerHTML = `
+      <span class="dibujo" aria-hidden="true">${item.icon}</span>
+      <span class="etiqueta"><span class="distintivo ${item.g}">${item.g} ${item.w}</span></span>`;
+    tarjeta.addEventListener('click', () => {
+      const visible = tarjeta.classList.toggle('revelada');
+      tarjeta.setAttribute('aria-label', visible
+        ? `${item.g} ${item.w}. Tócala para ocultarla.`
+        : 'Tarjeta de vocabulario. Tócala para ver la palabra.');
+    });
+    rejilla.appendChild(tarjeta);
+  });
+}
+
+/* Barajado de Fisher-Yates. Ordenar con Math.random() - 0.5 no reparte por
+   igual: deja las palabras cerca de su posición inicial más veces de la cuenta. */
+function mezclar(lista) {
+  const copia = [...lista];
+  for (let i = copia.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copia[i], copia[j]] = [copia[j], copia[i]];
+  }
+  return copia;
+}
+
+document.querySelector('[data-mostrar]').addEventListener('click', () => {
+  document.querySelectorAll('.tarjeta-palabra').forEach((t) => t.classList.add('revelada'));
+});
+
+document.querySelector('[data-ocultar]').addEventListener('click', () => {
+  document.querySelectorAll('.tarjeta-palabra').forEach((t) => t.classList.remove('revelada'));
+});
+
+document.querySelector('[data-mezclar]').addEventListener('click', () => {
+  orden = mezclar(orden);
+  pintar();
+});
+
+pintar();
+</script>
+</body>
+</html>

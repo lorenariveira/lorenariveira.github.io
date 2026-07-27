@@ -105,6 +105,19 @@ montes un "login" en JavaScript**: la contraseña viajaría en el código que de
 el navegador. Si alguna vez hace falta control de acceso real, la respuesta es
 cambiar de alojamiento o pagar GitHub Pro, no simularlo.
 
+Las actividades que Lorena escribe llegan como archivos sueltos con su propio
+diseño. La forma de integrarlas es **copiar el archivo y redefinir los valores de
+sus variables CSS** a los del sitio, conservando sus nombres y sus reglas, más el
+marco común (cabecera, `portada--simple`, pie). Reescribirlas entera es tirar
+piedras sobre el propio tejado: el contenido pedagógico es suyo y hay que poder
+verificar que no cambió.
+
+**Arrastrar y soltar necesita siempre una alternativa.** El drag & drop de HTML5 no
+dispara ningún evento en pantallas táctiles, que es donde estudia la mayoría. Las
+dos actividades que lo usan llevan una segunda vía —tocar origen y luego destino en
+`preterito-indefinido.html`, flechas ▲▼ en `comida-y-lugares.html`— y cualquier
+actividad nueva con arrastre debe llevarla también.
+
 `assets/js/actividad.js` es el motor de las actividades de huecos. Una actividad
 nueva es solo HTML: un `<form data-quiz>`, un `<input data-respuesta="...">` por
 hueco —varias respuestas válidas separadas por `|`— y un `<p data-aviso>` dentro de
