@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Yo también, yo tampoco — Práctica</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../assets/css/style.css">
+
+<style>
+  /* Estilos propios de esta actividad, con los colores del sitio. */
+  .ejercicio { max-width: 38rem; margin-inline: auto; }
+
+  .contador { font-size: .85rem; color: var(--tinta-suave); margin-bottom: .5rem; }
+
+  .barra { height: 4px; background: var(--borde); border-radius: 2px; margin-bottom: 1.5rem; }
+  .barra__relleno { height: 100%; background: var(--terracota); border-radius: 2px; transition: width .3s ease; }
+
+  .frase-tarjeta {
+    background: #fff;
+    border: 1px solid var(--borde);
+    border-radius: var(--radio);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .etiqueta-frase {
+    font-size: .7rem;
+    color: var(--tinta-suave);
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    margin-bottom: .4rem;
+  }
+
+  .frase { font-family: var(--display); font-size: 1.35rem; line-height: 1.35; }
+
+  .opciones { display: grid; grid-template-columns: 1fr 1fr; gap: .65rem; margin-bottom: 1.25rem; }
+
+  .opcion {
+    background: #fff;
+    border: 1px solid var(--borde);
+    border-radius: 10px;
+    padding: .9rem;
+    font: inherit;
+    font-weight: 500;
+    color: var(--tinta);
+    cursor: pointer;
+    line-height: 1.4;
+    transition: background .15s ease, border-color .15s ease;
+  }
+  .opcion:hover:not(:disabled) { background: var(--crema-alt); border-color: #cdbaa6; }
+  .opcion:disabled { cursor: default; }
+
+  .opcion.es-bien { background: #eef2ec; border-color: var(--salvia); color: #3d5136; }
+  .opcion.es-mal  { background: #fbeae3; border-color: var(--terracota); color: var(--terracota-o); }
+  .opcion__marca { display: block; font-size: .7rem; margin-top: .25rem; opacity: .8; }
+
+  .comentario {
+    font-size: .92rem;
+    padding: .7rem 1rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    min-height: 2.75rem;
+  }
+  .comentario.es-bien { background: #eef2ec; color: #3d5136; }
+  .comentario.es-mal  { background: #fbeae3; color: var(--terracota-o); }
+
+  .fila-avance { display: flex; justify-content: flex-end; }
+
+  .marcador {
+    text-align: center;
+    padding: 3rem 1rem;
+    background: #fff;
+    border: 1px solid var(--borde);
+    border-radius: var(--radio);
+  }
+  .marcador__numero { font-family: var(--display); font-size: 3.5rem; color: var(--terracota); line-height: 1; }
+  .marcador__texto { color: var(--tinta-suave); margin: .75rem 0 1.75rem; }
+
+  @media (max-width: 26rem) {
+    .frase { font-size: 1.15rem; }
+    .opcion { font-size: .9rem; padding: .8rem .5rem; }
+  }
+</style>
+</head>
+<body>
+
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+
+<header class="cabecera">
+  <div class="contenedor cabecera__inner">
+    <a class="marca" href="index.html">Práctica<span>Lorena Riveira</span></a>
+    <nav class="nav" aria-label="Navegación">
+      <a href="index.html">Todas las actividades</a>
+    </nav>
+  </div>
+</header>
+
+<main id="contenido">
+
+  <section class="portada portada--simple">
+    <div class="contenedor">
+      <div class="portada__texto">
+        <h1>Yo también · Yo tampoco · Yo sí · Yo no</h1>
+        <p class="portada__entradilla">Reacciona a cada frase según tu opinión personal.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion seccion--alt">
+    <div class="contenedor">
+      <div class="ejercicio" id="app" aria-live="polite"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="pie">
+  <div class="contenedor pie__inner">
+    <div><p>© 2020–2026 Lorena Riveira</p></div>
+  </div>
+</footer>
+
+<script>
+const frases = [
+  { text: "No tengo hijos.", tipo: "negativa", correct: ["Yo tampoco", "Yo sí"] },
+  { text: "Hablo inglés y español.", tipo: "afirmativa", correct: ["Yo también", "Yo no"] },
+  { text: "No bebo café por la mañana.", tipo: "negativa", correct: ["Yo tampoco", "Yo sí"] },
+  { text: "Vivo en un apartamento.", tipo: "afirmativa", correct: ["Yo también", "Yo no"] },
+  { text: "No tengo coche.", tipo: "negativa", correct: ["Yo tampoco", "Yo sí"] },
+  { text: "Como mucha fruta.", tipo: "afirmativa", correct: ["Yo también", "Yo no"] },
+  { text: "No voy al gimnasio.", tipo: "negativa", correct: ["Yo tampoco", "Yo sí"] },
+  { text: "Duermo ocho horas cada noche.", tipo: "afirmativa", correct: ["Yo también", "Yo no"] },
+  { text: "No entiendo el alemán.", tipo: "negativa", correct: ["Yo tampoco", "Yo sí"] },
+  { text: "Trabajo los fines de semana.", tipo: "afirmativa", correct: ["Yo también", "Yo no"] },
+  { text: "No toco instrumentos.", tipo: "negativa", correct: ["Yo tampoco", "Yo sí"] },
+  { text: "Voy al supermercado los sábados.", tipo: "afirmativa", correct: ["Yo también", "Yo no"] },
+  { text: "No leo libros en inglés.", tipo: "negativa", correct: ["Yo tampoco", "Yo sí"] },
+  { text: "Tengo muchos amigos en el trabajo.", tipo: "afirmativa", correct: ["Yo también", "Yo no"] },
+  { text: "Cocino muy bien.", tipo: "afirmativa", correct: ["Yo también", "Yo no"] },
+];
+
+const todasLasOpciones = ["Yo también", "Yo tampoco", "Yo sí", "Yo no"];
+
+const explicaciones = {
+  afirmativa: {
+    "Yo también": "estás de acuerdo con una frase afirmativa.",
+    "Yo no": "no estás de acuerdo con una frase afirmativa.",
+  },
+  negativa: {
+    "Yo tampoco": "estás de acuerdo con una frase negativa.",
+    "Yo sí": "no estás de acuerdo con una frase negativa.",
+  }
+};
+
+const app = document.getElementById('app');
+let actual = 0, aciertos = 0, respondida = false, elegida = null;
+
+function comentarioDe(frase, elegida) {
+  if (frase.correct.includes(elegida)) {
+    const otra = frase.correct.find((o) => o !== elegida);
+    return {
+      ok: true,
+      texto: `¡Correcto! Usas <strong>${elegida}</strong> cuando ${explicaciones[frase.tipo][elegida]} También sería válido <strong>${otra}</strong> si tu opinión fuera diferente.`
+    };
+  }
+  return {
+    ok: false,
+    texto: `Esta opción no encaja aquí. Las respuestas válidas son <strong>${frase.correct.join('</strong> o <strong>')}</strong>, según tu opinión personal.`
+  };
+}
+
+function pintar() {
+  if (actual >= frases.length) {
+    const pct = Math.round(aciertos / frases.length * 100);
+    const animo = pct >= 80 ? '¡Excelente trabajo!' : pct >= 50 ? '¡Buen intento!' : 'Sigue practicando.';
+    app.innerHTML = `<div class="marcador">
+      <p class="marcador__numero">${aciertos}/${frases.length}</p>
+      <p class="marcador__texto">${animo}</p>
+      <button class="boton" type="button" data-reiniciar>Volver a intentarlo</button>
+    </div>`;
+    app.querySelector('[data-reiniciar]').focus();
+    return;
+  }
+
+  const frase = frases[actual];
+  const pct = Math.round(actual / frases.length * 100);
+
+  const botones = todasLasOpciones.map((o) => {
+    let clase = 'opcion';
+    let marca = '';
+    if (respondida) {
+      if (frase.correct.includes(o)) { clase += ' es-bien'; marca = '<span class="opcion__marca">✓ válido</span>'; }
+      else if (o === elegida) clase += ' es-mal';
+    }
+    return `<button class="${clase}" type="button" data-opcion="${o}" ${respondida ? 'disabled' : ''}>${o}${marca}</button>`;
+  }).join('');
+
+  let comentario = '<p class="comentario"></p>';
+  if (respondida) {
+    const { ok, texto } = comentarioDe(frase, elegida);
+    comentario = `<p class="comentario ${ok ? 'es-bien' : 'es-mal'}">${texto}</p>`;
+  }
+
+  app.innerHTML = `
+    <p class="contador">Ejercicio ${actual + 1} de ${frases.length}</p>
+    <div class="barra"><div class="barra__relleno" style="width:${pct}%"></div></div>
+    <div class="frase-tarjeta">
+      <p class="etiqueta-frase">Reacciona a la frase…</p>
+      <p class="frase">«${frase.text}»</p>
+    </div>
+    <div class="opciones">${botones}</div>
+    ${comentario}
+    <div class="fila-avance">
+      <button class="boton" type="button" data-siguiente ${!respondida ? 'disabled' : ''}>Siguiente →</button>
+    </div>`;
+
+  /* Al repintar se pierde el foco. Lo devolvemos donde toca para que quien
+     navega con teclado no vuelva al principio de la página en cada paso. */
+  if (respondida) app.querySelector('[data-siguiente]').focus();
+  else if (actual > 0) app.querySelector('[data-opcion]').focus();
+}
+
+app.addEventListener('click', (e) => {
+  const opcion = e.target.closest('[data-opcion]');
+  if (opcion && !respondida) {
+    respondida = true;
+    elegida = opcion.dataset.opcion;
+    if (frases[actual].correct.includes(elegida)) aciertos++;
+    pintar();
+    return;
+  }
+  if (e.target.closest('[data-siguiente]')) {
+    actual++; respondida = false; elegida = null;
+    pintar();
+    return;
+  }
+  if (e.target.closest('[data-reiniciar]')) {
+    actual = 0; aciertos = 0; respondida = false; elegida = null;
+    pintar();
+  }
+});
+
+pintar();
+</script>
+</body>
+</html>
