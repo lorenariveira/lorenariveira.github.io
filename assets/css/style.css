@@ -177,14 +177,26 @@ p:last-child { margin-bottom: 0; }
 
 .portada__acciones { display: flex; gap: .75rem; flex-wrap: wrap; margin-top: 1.75rem; }
 
+/* El retrato enlaza a LinkedIn: el enlace lleva el tamaño y la foto lo llena. */
+.retrato-enlace {
+  display: block;
+  max-width: 20rem;
+  margin-inline: auto;
+  border-radius: 50%;
+  transition: transform .22s ease, box-shadow .22s ease;
+}
+
+.retrato-enlace:hover { transform: translateY(-4px); }
+.retrato-enlace:hover .retrato { box-shadow: 0 6px 12px rgb(47 39 35 / .10), 0 22px 48px rgb(47 39 35 / .16); }
+
 .retrato {
+  width: 100%;
   border-radius: 50%;
   aspect-ratio: 1;
   object-fit: cover;
   box-shadow: var(--sombra);
   border: 6px solid #fff;
-  margin-inline: auto;
-  max-width: 20rem;
+  transition: box-shadow .22s ease;
 }
 
 /* Bloque "sobre mí" ------------------------------------------------ */
@@ -460,13 +472,27 @@ p:last-child { margin-bottom: 0; }
 .pie strong { color: var(--tinta); font-weight: 600; }
 .pie__sello { width: 74px; border-radius: 8px; }
 
+.pie__marcas { display: flex; align-items: center; gap: 1.25rem; }
+
+.pie__social {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  color: var(--tinta-suave);
+  transition: color .18s ease, background .18s ease;
+}
+.pie__social:hover { color: var(--terracota); background: var(--crema-alt); }
+.pie__social svg { width: 1.5rem; height: 1.5rem; }
+
 /* Adaptación a móvil ----------------------------------------------- */
 @media (max-width: 46rem) {
   .portada__grid,
   .sobre__grid { grid-template-columns: 1fr; }
 
   .portada__grid > :first-child { order: 2; }
-  .retrato { max-width: 15rem; }
+  .retrato-enlace { max-width: 15rem; }
   .portada__entradilla { max-width: none; }
   .cabecera__inner { justify-content: center; text-align: center; }
   .pie__inner { justify-content: center; text-align: center; }
