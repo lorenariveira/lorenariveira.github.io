@@ -242,12 +242,48 @@ p:last-child { margin-bottom: 0; }
   place-items: center;
   width: 3.25rem;
   height: 3.25rem;
-  margin-bottom: 1.1rem;
+  margin: 0 auto 1.1rem;
   border-radius: 50%;
   background: var(--crema-alt);
   color: var(--terracota);
 }
 .tarjeta__icono svg { width: 1.7rem; height: 1.7rem; }
+
+/* Franja de datos rápidos ------------------------------------------ */
+.datos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .6rem;
+  list-style: none;
+  padding: 0;
+  margin: 1.75rem 0 0;
+}
+
+.datos li {
+  background: var(--crema-alt);
+  border: 1px solid var(--borde);
+  border-radius: 999px;
+  padding: .4rem 1rem;
+  font-size: .88rem;
+  font-weight: 500;
+  color: var(--tinta-suave);
+}
+
+/* Aparición al hacer scroll ---------------------------------------- */
+/* La clase "con-revelado" la pone el JS: sin JavaScript nada se oculta. */
+.con-revelado .tarjetas > li {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity .5s ease, transform .5s ease;
+}
+.con-revelado .tarjetas > li.visible { opacity: 1; transform: none; }
+
+.con-revelado .tarjetas > li:nth-child(2) { transition-delay: .08s; }
+.con-revelado .tarjetas > li:nth-child(3) { transition-delay: .16s; }
+.con-revelado .tarjetas > li:nth-child(4) { transition-delay: .24s; }
+.con-revelado .tarjetas > li:nth-child(5) { transition-delay: .32s; }
+.con-revelado .tarjetas > li:nth-child(6) { transition-delay: .40s; }
 
 /* Testimonios ------------------------------------------------------ */
 .titulo-centrado { text-align: center; margin-bottom: 2rem; }
