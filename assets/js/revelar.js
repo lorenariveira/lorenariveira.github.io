@@ -3,7 +3,7 @@
    que si no hay JavaScript —o si el visitante pidió reducir el movimiento—
    las tarjetas se ven desde el principio y nunca queda contenido oculto. */
 
-const SELECTOR = '.tarjetas > li';
+const SELECTOR = '.tarjetas > li, .destacado';
 
 const elementos = document.querySelectorAll(SELECTOR);
 const sinMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
