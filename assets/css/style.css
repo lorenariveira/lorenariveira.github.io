@@ -303,6 +303,23 @@ p:last-child { margin-bottom: 0; }
   background: var(--terracota);
 }
 
+/* En pantallas estrechas la fila centrada se partía en escalera, con unos
+   datos solos y otros emparejados. En dos columnas fijas quedan alineados. */
+@media (max-width: 30rem) {
+  .datos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    max-width: 22rem;
+    margin-inline: auto;
+    gap: .65rem 1rem;
+    font-size: .84rem;
+    text-align: left;
+  }
+
+  .datos li { align-items: start; }
+  .datos li::before { margin-top: .45em; }
+}
+
 /* Aparición al hacer scroll ---------------------------------------- */
 /* La clase "con-revelado" la pone el JS: sin JavaScript nada se oculta. */
 .con-revelado .tarjetas > li,
