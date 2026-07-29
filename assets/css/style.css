@@ -177,26 +177,17 @@ p:last-child { margin-bottom: 0; }
 
 .portada__acciones { display: flex; gap: .75rem; flex-wrap: wrap; margin-top: 1.75rem; }
 
-/* El retrato enlaza a LinkedIn: el enlace lleva el tamaño y la foto lo llena. */
-.retrato-enlace {
-  display: block;
-  max-width: 20rem;
-  margin-inline: auto;
-  border-radius: 50%;
-  transition: transform .22s ease, box-shadow .22s ease;
-}
-
-.retrato-enlace:hover { transform: translateY(-4px); }
-.retrato-enlace:hover .retrato { box-shadow: 0 6px 12px rgb(47 39 35 / .10), 0 22px 48px rgb(47 39 35 / .16); }
-
+/* El retrato es solo imagen, sin enlace: es lo primero que se ve y sacar de la
+   página desde ahí sería trabajar en contra. LinkedIn se enlaza desde el pie. */
 .retrato {
   width: 100%;
+  max-width: 20rem;
+  margin-inline: auto;
   border-radius: 50%;
   aspect-ratio: 1;
   object-fit: cover;
   box-shadow: var(--sombra);
   border: 6px solid #fff;
-  transition: box-shadow .22s ease;
 }
 
 /* Bloque "sobre mí" ------------------------------------------------ */
@@ -568,7 +559,7 @@ p:last-child { margin-bottom: 0; }
   .sobre__grid { grid-template-columns: 1fr; }
 
   .portada__grid > :first-child { order: 2; }
-  .retrato-enlace { max-width: 15rem; }
+  .retrato { max-width: 15rem; }
   .portada__entradilla { max-width: none; }
   .cabecera__inner { justify-content: center; text-align: center; }
   .pie__inner { justify-content: center; text-align: center; }
