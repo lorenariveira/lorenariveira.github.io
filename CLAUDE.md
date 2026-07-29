@@ -42,14 +42,16 @@ inferior, y luego `-crop 390x<alto>+0+0`.
 borrarse. El repositorio es `lorenariveira/lorenariveira.github.io` y debe seguir
 siendo público: GitHub Pages solo funciona en repositorios privados con plan de pago.
 
-**Pendiente a 27 de julio de 2026:** `lorenariveira.com` todavía apunta a Wix
-(`23.236.62.147` y `34.149.87.45`). El dominio está en Namecheap con sus DNS
-propios; faltan los cuatro registros A hacia `185.199.108-111.153` y el CNAME de
-`www` hacia `lorenariveira.github.io`. Hasta que eso se haga, el sitio solo se ve
-forzando la resolución:
-`curl --resolve lorenariveira.com:80:185.199.108.153 http://lorenariveira.com/`.
-Después hay que activar *Enforce HTTPS* en Settings → Pages, y solo entonces dar
-de baja Wix.
+**El DNS ya está migrado (comprobado el 29 de julio de 2026).** El dominio está en
+Namecheap con sus DNS propios: los cuatro registros A apuntan a
+`185.199.108-111.153` y el CNAME de `www` a `lorenariveira.github.io`. *Enforce
+HTTPS* está activo, así que `http://` devuelve un 301 a `https://` y `www` redirige
+al dominio sin `www`. Para verificarlo sin depender del navegador:
+
+```bash
+getent hosts lorenariveira.com www.lorenariveira.com
+curl -sS -o /dev/null -D - https://lorenariveira.com/
+```
 
 ## Los textos vienen de Wix y son literales
 
