@@ -53,6 +53,31 @@ getent hosts lorenariveira.com www.lorenariveira.com
 curl -sS -o /dev/null -D - https://lorenariveira.com/
 ```
 
+## Pendiente: la versión en inglés
+
+Acordado el 29 de julio de 2026, sin empezar todavía. Alcance: solo `index.html` y
+`clases.html`. `practica/` se queda en español.
+
+GitHub Pages no puede traducir nada: es alojamiento estático. La versión inglesa se
+escribe a mano y vive en `/en/`, con los nombres de archivo en inglés
+—`/en/index.html` y `/en/classes.html`— que es la única excepción acordada a la
+regla de nombrar los archivos en español: una URL la lee el visitante, no el código.
+Desde `/en/` los recursos se referencian como `../assets/`. Hay que poner `hreflang`
+recíproco entre cada par de páginas y cambiar `og:locale` a `en_US`.
+
+El botón de cambio de idioma va en la cabecera de las cuatro páginas, y cada uno
+enlaza a su equivalente, no a la portada.
+
+**El testimonio de Gabriela T. se queda en español, sin traducir**, con `lang="es"`.
+Es la misma regla que ya sigue la página española al dejar en inglés los otros tres:
+cada testimonio conserva las palabras que escribió cada estudiante.
+
+**No hay plantillas ni compilación, así que las dos versiones no se sincronizan
+solas: todo cambio en `index.html` o `clases.html` hay que replicarlo a mano en
+`en/`, en la misma tanda.** Es el precio de no meter un paso de compilación en un
+sitio cuya gracia es no tenerlo, y el riesgo real es que las dos versiones se
+separen sin que nadie lo note.
+
 ## Los textos vienen de Wix y son literales
 
 Todo el contenido se copió palabra por palabra del sitio original y se verificó
