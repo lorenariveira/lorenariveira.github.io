@@ -24,6 +24,12 @@ El de correo lleva el asunto puesto:
 espacios van como `%20` y no como `+`: en un `mailto` el `+` es un signo más literal,
 no un espacio.
 
+**No es el único `mailto:` del sitio.** El botón «Reserva tu clase de prueba» de
+`clases.html` usa otro asunto, «Reserva de clase de prueba», y además lleva cuerpo.
+Los asuntos son distintos a propósito, para que en la bandeja de entrada se
+distinga quién viene a reservar de quién escribe por otra cosa. Si tocas uno,
+comprueba que el otro sigue teniendo sentido.
+
 ### El enlace de WhatsApp no lleva el número
 
 Las dos páginas apuntan a
@@ -32,14 +38,19 @@ Las dos páginas apuntan a
 el HTML se lee tanto en el sitio como en GitHub, al alcance de cualquier bot que
 rastree números. Si añades otro botón de WhatsApp, usa este mismo enlace.
 
-**El mensaje precargado se configura dentro de WhatsApp Business, no en el HTML**
-(Herramientas para la empresa → Código QR), con un máximo de 140 caracteres. El
-parámetro `?text=` **no funciona** con un enlace `wa.me/qr/`: WhatsApp lo descarta
-en la redirección, comprobado con `curl` —con y sin `?text=` se acaba en la misma
-URL, `api.whatsapp.com/qr/<código>?autoload=1&app_absent=0`—. Es el intercambio de
-estos enlaces: ocultan el número precisamente porque dejan de llevar datos en la
-URL. Solo `wa.me/<número>?text=…` admite mensaje en el enlace, y ese expone el
-número.
+**El botón de WhatsApp abre la conversación en blanco, y así se queda.** Se estudió
+ponerle un mensaje precargado y se descartó el 4 de agosto de 2026: el parámetro
+`?text=` **no funciona** con un enlace `wa.me/qr/` —WhatsApp lo descarta en la
+redirección, comprobado con `curl`: con y sin `?text=` se acaba en la misma URL,
+`api.whatsapp.com/qr/<código>?autoload=1&app_absent=0`—. Es el intercambio de estos
+enlaces: ocultan el número precisamente porque dejan de llevar datos en la URL. La
+única vía era configurarlo dentro de WhatsApp Business (Herramientas para la empresa
+→ Código QR, máximo 140 caracteres), y Lorena decidió no hacerlo.
+
+**No vuelvas a intentarlo por el HTML.** La alternativa que sí admite mensaje en el
+enlace es `wa.me/<número>?text=…`, y esa expone el número, que es justo lo que se
+quitó. Quien quiera un contacto con asunto ya declarado tiene el botón «Reserva tu
+clase de prueba», que es un `mailto:`.
 
 Y no intentes esconder el número con JavaScript: viajaría igual en el código que
 descarga el navegador. Es el mismo razonamiento que prohíbe el "login" de mentira
@@ -162,9 +173,14 @@ decisiones de diseño— hay Chrome instalado:
 
 ```bash
 google-chrome-stable --headless --no-sandbox --hide-scrollbars \
-  --virtual-time-budget=6000 --window-size=390,5000 \
+  --virtual-time-budget=6000 --window-size=390,6000 \
   --screenshot=captura.png http://127.0.0.1:8000/index.html
 ```
+
+El alto de la ventana tiene que superar al de la página o la captura sale cortada
+por abajo sin avisar. A 4 de agosto de 2026 `clases.html` mide unos 5100 px en
+móvil, así que 5000 ya no basta. Comprueba el número que devuelve el recorte: si
+coincide con el alto que pediste, casi seguro que se cortó.
 
 El recorte a la altura real del contenido se hace con ImageMagick:
 `magick captura.png -fuzz 3% -trim -format "%[fx:page.y+h]" info:` da el borde
@@ -224,6 +240,14 @@ reescribas, resumas ni "mejores" sin que Lorena lo pida.** Las excepciones ya
 acordadas: se quitó "reservas" de la entradilla de portada (esa página no existe) y
 los años de experiencia se actualizaron a 14.
 
+Hay dos bloques que **no** vienen de Wix y que por tanto no hay que "restaurar":
+toda la sección de precios de `clases.html`, y la lista de datos rápidos de su
+portada, que Lorena reordenó el 4 de agosto de 2026 hasta dejarla así: enfoque
+comunicativo, programas personalizados, online y presencial, todos los niveles,
+profesora CELTA y más de 14 años de experiencia. El orden es intencionado —abre por
+el método y cierra por las credenciales—, así que no lo alfabetices ni lo agrupes
+por tu cuenta.
+
 Los testimonios están en el idioma en que los escribió cada estudiante: tres en
 inglés (con `lang="en"`) y uno en español. Wix solo renderizaba el primero en el
 HTML; los cuatro se recuperaron del JSON de datos del sitio. Si hiciera falta
@@ -234,7 +258,8 @@ volver a esa fuente, el patrón es
 ## Detalles del CSS que parecen arbitrarios y no lo son
 
 `assets/css/style.css` es la única hoja de estilos. Los colores y tipografías están
-agrupados en `:root` al principio. Tres decisiones se romperían fácil sin saber por qué:
+agrupados en `:root` al principio, después de los `@font-face`. Cuatro decisiones se
+romperían fácil sin saber por qué:
 
 **El titular de portada se mide con `cqi`, no con `vw`.** `.portada__texto` declara
 `container-type: inline-size` para que `.portada h1 { font-size: min(7cqi, 3.2rem) }`
