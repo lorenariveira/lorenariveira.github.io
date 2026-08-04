@@ -13,6 +13,38 @@ se migró a propósito: el contacto es directo por WhatsApp y email.
 variables JavaScript, los comentarios y los mensajes de commit están en español.
 Manténlo así.
 
+## Los dos botones de contacto
+
+Acordado el 4 de agosto de 2026. Los dos botones están en `index.html` y en
+`clases.html`, y **cualquier cambio en uno va en el otro en la misma tanda**: es
+donde ya se separaron una vez.
+
+El de correo lleva el asunto puesto:
+`mailto:info@lorenariveira.com?subject=Contacto%20desde%20lorenariveira.com`. Los
+espacios van como `%20` y no como `+`: en un `mailto` el `+` es un signo más literal,
+no un espacio.
+
+### El enlace de WhatsApp no lleva el número
+
+Las dos páginas apuntan a
+`https://wa.me/qr/J2IYGOXS4OORE1`, el enlace corto del código QR, **no** a
+`wa.me/<número>`. El motivo es que el repositorio es público y un número escrito en
+el HTML se lee tanto en el sitio como en GitHub, al alcance de cualquier bot que
+rastree números. Si añades otro botón de WhatsApp, usa este mismo enlace.
+
+**El mensaje precargado se configura dentro de WhatsApp Business, no en el HTML**
+(Herramientas para la empresa → Código QR), con un máximo de 140 caracteres. El
+parámetro `?text=` **no funciona** con un enlace `wa.me/qr/`: WhatsApp lo descarta
+en la redirección, comprobado con `curl` —con y sin `?text=` se acaba en la misma
+URL, `api.whatsapp.com/qr/<código>?autoload=1&app_absent=0`—. Es el intercambio de
+estos enlaces: ocultan el número precisamente porque dejan de llevar datos en la
+URL. Solo `wa.me/<número>?text=…` admite mensaje en el enlace, y ese expone el
+número.
+
+Y no intentes esconder el número con JavaScript: viajaría igual en el código que
+descarga el navegador. Es el mismo razonamiento que prohíbe el "login" de mentira
+en `practica/`.
+
 ## Comandos
 
 No hay compilación, dependencias ni tests. Es HTML, CSS y JavaScript a secas.
