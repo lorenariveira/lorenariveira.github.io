@@ -73,8 +73,12 @@ Conviene que siga siendo verdad.
 
 Detalles que no son evidentes:
 
+- Son tres familias: **Fraunces** para titulares, **Inter** para el texto y
+  **Caveat**, manuscrita, que usa **solo la viñeta de la portada**. Si Caveat deja
+  de usarse ahí, borra también sus archivos: son 104 KB que si no se descargan para
+  nada.
 - Son **fuentes variables**: un archivo cubre todo un rango de grosores. Por eso hay
-  seis archivos y no catorce, y por eso los `@font-face` declaran rangos
+  ocho archivos y no veintitantos, y por eso los `@font-face` declaran rangos
   (`font-weight: 500 600`) en vez de pesos sueltos.
 - Solo se descargaron los subconjuntos **`latin` y `latin-ext`**. Los de cirílico,
   griego y vietnamita que sirve Google se descartaron: no hacen falta para español,
@@ -83,8 +87,8 @@ Detalles que no son evidentes:
   se descarga el archivo `latin-ext` si el texto no lo necesita.
 - El `src` es `../fuentes/…`, relativo a `assets/css/style.css`, así que resuelve
   igual desde la raíz que desde `practica/`. No lo cambies a una ruta absoluta.
-- Ambas son OFL 1.1 y su licencia va al lado, en `assets/fuentes/OFL-*.txt`.
-  Redistribuirlas obliga a conservarlas.
+- Las tres son OFL 1.1 y su licencia va al lado, en `assets/fuentes/OFL-*.txt`.
+  Redistribuirlas obliga a conservarlas: si añades una familia, baja también su OFL.
 
 Para regenerarlas, pide el CSS a Google con un `User-Agent` de navegador moderno
 (si no, devuelve `ttf` en vez de `woff2`), quédate con los bloques `latin` y
@@ -240,7 +244,21 @@ reescribas, resumas ni "mejores" sin que Lorena lo pida.** Las excepciones ya
 acordadas: se quitó "reservas" de la entradilla de portada (esa página no existe) y
 los años de experiencia se actualizaron a 14.
 
-Hay dos bloques que **no** vienen de Wix y que por tanto no hay que "restaurar":
+**La portada de `index.html` se reescribió el 4 de agosto de 2026 a petición de
+Lorena**, para que su nombre y su servicio fueran lo primero que se ve. De Wix
+venían el titular "Clases de inglés y español / individuales y grupales" y la
+entradilla "Echa un vistazo para enterarte sobre las clases y mucho más."; los dos
+se sustituyeron. El titular actual, "Clases de inglés y español en Ámsterdam", se
+armó con palabras que ya estaban en el sitio. **La entradilla la escribió Lorena**
+—"Te ayudo a aprender o mejorar tu inglés o español. Clases pensadas alrededor de
+ti: tu nivel, tus objetivos y tu ritmo."— y habla al lector de tú a propósito: no la
+pases a tercera persona ni la "neutralices".
+
+Ojo con `ti`: **no lleva tilde nunca**, ni siquiera cuando acompaña a un
+posesivo. Es la clase de errata que en el sitio de una profesora de idiomas se paga
+cara, así que revísalo cada vez que se toque este texto.
+
+Hay otros dos bloques que tampoco vienen de Wix y que no hay que "restaurar":
 toda la sección de precios de `clases.html`, y la lista de datos rápidos de su
 portada, que Lorena reordenó el 4 de agosto de 2026 hasta dejarla así: enfoque
 comunicativo, programas personalizados, online y presencial, todos los niveles,
@@ -262,10 +280,29 @@ agrupados en `:root` al principio, después de los `@font-face`. Cuatro decision
 romperían fácil sin saber por qué:
 
 **El titular de portada se mide con `cqi`, no con `vw`.** `.portada__texto` declara
-`container-type: inline-size` para que `.portada h1 { font-size: min(7cqi, 3.2rem) }`
-se calcule sobre el ancho real de su columna. Es lo que mantiene "Clases de inglés y
-español" en una sola línea desde 320px hasta escritorio. Si cambias el reparto de
-columnas de `.portada__grid`, ese 7cqi deja de tener el margen que se calculó.
+`container-type: inline-size` para que `.portada h1 { font-size: min(7.4cqi, 3.1rem) }`
+se calcule sobre el ancho real de esa columna y no sobre la ventana. **Si cambias el
+reparto de columnas de `.portada__grid` (hoy `1.2fr .9fr`), ese valor deja de tener
+el margen que se calculó**: compruébalo a 390px y a 1280px antes de darlo por bueno.
+
+**El nombre no está en el `<h1>`, y es deliberado.** El `h1` dice "Clases de inglés
+y español en Ámsterdam" —las palabras por las que busca quien todavía no conoce a
+Lorena— y el nombre vive en la viñeta `.portada__saludo`, que es un saludo dibujado
+y no un encabezado. Si algún día el nombre vuelve al `h1`, que sea acompañando al
+servicio, nunca en su lugar.
+
+**La viñeta se ancla a la foto, no a la celda de la rejilla.** `.portada__retrato`
+lleva el `max-width` y el `container-type: inline-size`, y la imagen ocupa el 100 %
+de él. Es lo que hace que en móvil el saludo quede pegado a la cara: si el
+`max-width` volviera a `.retrato`, la celda seguiría siendo ancha y la viñeta se
+iría al borde de la pantalla. La cola es un cuadrado girado 45° con solo dos bordes,
+y la inclinación de −4° va en el globo entero, cola incluida, porque ambos están en
+el mismo elemento.
+
+**La viñeta va en Caveat y bastante más grande de lo que parecería necesario.** No
+es capricho: las manuscritas tienen la altura de equis mucho más baja que una serif,
+así que al mismo tamaño en puntos se leen bastante más pequeñas. Si la cambias por
+otra tipografía, revisa el `font-size` en vez de heredarlo.
 
 **La aparición al hacer scroll usa `translate` y el hover usa `transform`.** Son dos
 propiedades CSS distintas que se componen. Cuando ambas efectos usaban `transform`,

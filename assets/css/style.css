@@ -8,10 +8,11 @@
    desde Google, el navegador de cada visitante le entrega su IP antes
    de que la página cargue y sin consentimiento. Ver CLAUDE.md.
 
-   Las dos son fuentes variables, así que un solo archivo cubre todo
-   el rango de grosores; por eso hay seis archivos y no catorce. Los
-   `unicode-range` son los de Google sin tocar: si el texto solo usa
-   latín básico, el navegador ni descarga el archivo `latin-ext`.
+   Las tres son fuentes variables, así que un solo archivo cubre todo
+   el rango de grosores de cada una; por eso hay ocho archivos y no
+   veintitantos. Los `unicode-range` son los de Google sin tocar: si el
+   texto solo usa latín básico, el navegador ni descarga el `latin-ext`.
+   Caveat solo la usa la viñeta de la portada.
    ------------------------------------------------------------------ */
 
 @font-face {
@@ -63,7 +64,25 @@
   unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 
+@font-face {
+  font-family: "Caveat";
+  font-style: normal;
+  font-weight: 500 600;
+  font-display: swap;
+  src: url(../fuentes/caveat-normal-latin.woff2) format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Caveat";
+  font-style: normal;
+  font-weight: 500 600;
+  font-display: swap;
+  src: url(../fuentes/caveat-normal-latin-ext.woff2) format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
 :root {
+  --manuscrita: "Caveat", "Segoe Script", cursive;
   --crema:      #fbf6f0;
   --crema-alt:  #f4e9dd;
   --tinta:      #2f2723;
@@ -211,28 +230,79 @@ p:last-child { margin-bottom: 0; }
 
 .portada__grid {
   display: grid;
-  grid-template-columns: 1.3fr .8fr;
+  grid-template-columns: 1.2fr .9fr;
   gap: clamp(2rem, 5vw, 4rem);
   align-items: center;
 }
 
 /* La columna de texto se declara contenedor para poder medirla: así el
-   titular se dimensiona según su ancho real y nunca parte "Clases de
-   inglés y español" en dos, ni se desborda en pantallas estrechas. */
+   titular se dimensiona según su ancho real y no se desborda en pantallas
+   estrechas. Las medidas en cqi de aquí abajo se calculan sobre esta
+   columna, no sobre la ventana. */
 .portada__texto { container-type: inline-size; }
 
-.portada h1 { font-size: min(7cqi, 3.2rem); }
+.portada h1 { font-size: min(7.4cqi, 3.1rem); line-height: 1.15; }
+
+/* El saludo se ancla a la foto, no a la celda de la rejilla: por eso el
+   contenedor lleva el max-width y la imagen ocupa el 100% de él. Si el
+   max-width volviera a la imagen, en móvil la celda seguiría siendo ancha y
+   la viñeta se iría al borde de la pantalla, lejos de la cara. */
+.portada__retrato {
+  position: relative;
+  container-type: inline-size;   /* para que los cqi del saludo midan la foto */
+  width: 100%;
+  max-width: 22rem;
+  margin-inline: auto;
+}
+
+/* Flota sobre la foto y va algo torcida, para que parezca puesta a mano y no
+   un elemento más de la maqueta. La inclinación es del globo entero, cola
+   incluida, porque va en el mismo elemento. */
+.portada__saludo {
+  position: absolute;
+  top: 1%;
+  left: 2%;
+  z-index: 2;
+  margin: 0;
+  padding: .6rem 1.5rem .7rem;
+  background: #fff;
+  border: 1px solid var(--borde);
+  border-radius: 999px;
+  box-shadow: var(--sombra);
+  font-family: var(--manuscrita);
+  font-weight: 600;
+  /* La manuscrita tiene la equis mucho más baja que la Fraunces, así que a
+     igual tamaño se lee más pequeña: de ahí que vaya bastante por encima. */
+  font-size: clamp(1.45rem, 7cqi, 1.9rem);
+  line-height: 1.25;
+  color: var(--terracota-o);
+  white-space: nowrap;
+  rotate: -4deg;
+}
+
+/* La cola: un cuadrado girado 45°, con solo dos bordes, para que parezca que
+   sale de la viñeta y no una figura pegada encima. */
+.portada__saludo::after {
+  content: "";
+  position: absolute;
+  bottom: -.5rem;
+  left: 2rem;
+  width: .95rem;
+  height: .95rem;
+  background: #fff;
+  border-right: 1px solid var(--borde);
+  border-bottom: 1px solid var(--borde);
+  rotate: 45deg;
+}
 
 /* Portada sin imagen: una sola columna centrada. */
 .portada--simple .portada__texto { max-width: 42rem; margin-inline: auto; text-align: center; }
 .portada--simple .portada__entradilla { max-width: 38ch; margin-inline: auto; }
 
-.nowrap { white-space: nowrap; }
-
 .portada__entradilla {
   font-size: clamp(1.05rem, 2vw, 1.25rem);
   color: var(--tinta-suave);
-  max-width: 34ch;
+  max-width: 44ch;
 }
 
 .portada__acciones { display: flex; gap: .75rem; flex-wrap: wrap; margin-top: 1.75rem; }
@@ -240,9 +310,8 @@ p:last-child { margin-bottom: 0; }
 /* El retrato es solo imagen, sin enlace: es lo primero que se ve y sacar de la
    página desde ahí sería trabajar en contra. LinkedIn se enlaza desde el pie. */
 .retrato {
+  display: block;
   width: 100%;
-  max-width: 20rem;
-  margin-inline: auto;
   border-radius: 50%;
   aspect-ratio: 1;
   object-fit: cover;
@@ -710,7 +779,9 @@ p:last-child { margin-bottom: 0; }
   .sobre__grid { grid-template-columns: 1fr; }
 
   .portada__grid > :first-child { order: 2; }
-  .retrato { max-width: 15rem; }
+  /* El max-width va al contenedor, no a la imagen: si fuera a la imagen, la
+     viñeta del saludo se anclaría a la celda ancha y no a la cara. */
+  .portada__retrato { max-width: 16rem; }
   .portada__entradilla { max-width: none; }
   .cabecera__inner { justify-content: center; text-align: center; }
   .pie__inner { justify-content: center; text-align: center; }
