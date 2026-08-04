@@ -45,6 +45,60 @@ Y no intentes esconder el número con JavaScript: viajaría igual en el código 
 descarga el navegador. Es el mismo razonamiento que prohíbe el "login" de mentira
 en `practica/`.
 
+## Las tipografías se sirven desde aquí, no desde Google
+
+Cambiado el 4 de agosto de 2026. Las ocho páginas cargaban Fraunces e Inter desde
+`fonts.googleapis.com`, y eso entrega la IP de cada visitante a Google antes de que
+la página termine de cargar y sin que nadie haya consentido nada. La IP es dato
+personal; el Tribunal Regional de Múnich condenó por esto en enero de 2022, con el
+argumento de que no hay base legal para la transferencia **porque existe la opción
+de autoalojar**. Es sentencia alemana y no vincula en Países Bajos, pero aplica el
+mismo RGPD y aquí hay un KvK neerlandés detrás.
+
+Los archivos están en `assets/fuentes/` y las declaraciones `@font-face` al principio
+de `style.css`. **No vuelvas a meter un `<link>` a `fonts.googleapis.com`**: el sitio
+no hace ni una sola petición a terceros y por eso no necesita banner de cookies.
+Conviene que siga siendo verdad.
+
+Detalles que no son evidentes:
+
+- Son **fuentes variables**: un archivo cubre todo un rango de grosores. Por eso hay
+  seis archivos y no catorce, y por eso los `@font-face` declaran rangos
+  (`font-weight: 500 600`) en vez de pesos sueltos.
+- Solo se descargaron los subconjuntos **`latin` y `latin-ext`**. Los de cirílico,
+  griego y vietnamita que sirve Google se descartaron: no hacen falta para español,
+  inglés ni neerlandés.
+- Los `unicode-range` son los de Google sin tocar. Gracias a ellos el navegador ni
+  se descarga el archivo `latin-ext` si el texto no lo necesita.
+- El `src` es `../fuentes/…`, relativo a `assets/css/style.css`, así que resuelve
+  igual desde la raíz que desde `practica/`. No lo cambies a una ruta absoluta.
+- Ambas son OFL 1.1 y su licencia va al lado, en `assets/fuentes/OFL-*.txt`.
+  Redistribuirlas obliga a conservarlas.
+
+Para regenerarlas, pide el CSS a Google con un `User-Agent` de navegador moderno
+(si no, devuelve `ttf` en vez de `woff2`), quédate con los bloques `latin` y
+`latin-ext` y descarga sus URL.
+
+## Datos estructurados (JSON-LD)
+
+Añadido el 4 de agosto de 2026. `index.html` y `clases.html` llevan **el mismo
+bloque `application/ld+json`**, un `@graph` con cuatro nodos: `WebSite`, `Person`,
+`Organization` y `Service`. Es idéntico en las dos a propósito, para que haya una
+sola cosa que mantener; si tocas uno, toca el otro.
+
+Dos cosas que hay que respetar:
+
+- **Es `Organization`, no `LocalBusiness`.** La documentación de Google reserva los
+  subtipos de `LocalBusiness` para direcciones físicas que el cliente puede visitar.
+  Aquí solo se declara localidad y país, sin calle.
+- **No lleva `telephone`, y no se lo pongas.** Reintroduciría en el HTML el número
+  que se quitó a propósito de los enlaces de WhatsApp.
+
+Tampoco lleva `aggregateRating` ni `review` pese a haber cuatro testimonios reales:
+las valoraciones que se pone a sí mismo el propio negocio no dan resultados
+enriquecidos y es terreno resbaladizo. Y no lleva `offers` porque todavía no hay
+precios publicados; si algún día los hay, ese es su sitio.
+
 ## Comandos
 
 No hay compilación, dependencias ni tests. Es HTML, CSS y JavaScript a secas.
@@ -95,7 +149,10 @@ escribe a mano y vive en `/en/`, con los nombres de archivo en inglés
 —`/en/index.html` y `/en/classes.html`— que es la única excepción acordada a la
 regla de nombrar los archivos en español: una URL la lee el visitante, no el código.
 Desde `/en/` los recursos se referencian como `../assets/`. Hay que poner `hreflang`
-recíproco entre cada par de páginas y cambiar `og:locale` a `en_US`.
+recíproco entre cada par de páginas y cambiar `og:locale` a `en_US`. El bloque de
+JSON-LD también viaja: con `inLanguage` en `en` y las URL de `/en/`, pero
+reutilizando los mismos `@id` para que Google entienda que es la misma persona y el
+mismo negocio, no dos.
 
 El botón de cambio de idioma va en la cabecera de las cuatro páginas, y cada uno
 enlaza a su equivalente, no a la portada.
