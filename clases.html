@@ -23,7 +23,9 @@
       "url": "https://lorenariveira.com/",
       "name": "Lorena Riveira — Language Instructor",
       "inLanguage": "es",
-      "publisher": { "@id": "https://lorenariveira.com/#lorena" }
+      "publisher": {
+        "@id": "https://lorenariveira.com/#lorena"
+      }
     },
     {
       "@type": "Person",
@@ -34,10 +36,20 @@
       "url": "https://lorenariveira.com/",
       "image": "https://lorenariveira.com/assets/img/lorena-retrato.jpg",
       "email": "info@lorenariveira.com",
-      "sameAs": ["https://www.linkedin.com/in/lorenariveira"],
+      "sameAs": [
+        "https://www.linkedin.com/in/lorenariveira"
+      ],
       "knowsLanguage": [
-        { "@type": "Language", "name": "Español", "alternateName": "es" },
-        { "@type": "Language", "name": "Inglés", "alternateName": "en" }
+        {
+          "@type": "Language",
+          "name": "Español",
+          "alternateName": "es"
+        },
+        {
+          "@type": "Language",
+          "name": "Inglés",
+          "alternateName": "en"
+        }
       ],
       "hasCredential": {
         "@type": "EducationalOccupationalCredential",
@@ -49,7 +61,9 @@
         "addressLocality": "Ámsterdam",
         "addressCountry": "NL"
       },
-      "worksFor": { "@id": "https://lorenariveira.com/#negocio" }
+      "worksFor": {
+        "@id": "https://lorenariveira.com/#negocio"
+      }
     },
     {
       "@type": "Organization",
@@ -57,9 +71,15 @@
       "name": "Lorena Riveira Language Instructor",
       "url": "https://lorenariveira.com/",
       "email": "info@lorenariveira.com",
-      "founder": { "@id": "https://lorenariveira.com/#lorena" },
+      "founder": {
+        "@id": "https://lorenariveira.com/#lorena"
+      },
       "identifier": [
-        { "@type": "PropertyValue", "name": "KvK", "value": "78123526" }
+        {
+          "@type": "PropertyValue",
+          "name": "KvK",
+          "value": "78123526"
+        }
       ],
       "address": {
         "@type": "PostalAddress",
@@ -67,8 +87,14 @@
         "addressCountry": "NL"
       },
       "areaServed": [
-        { "@type": "City", "name": "Ámsterdam" },
-        { "@type": "Country", "name": "Países Bajos" }
+        {
+          "@type": "City",
+          "name": "Ámsterdam"
+        },
+        {
+          "@type": "Country",
+          "name": "Países Bajos"
+        }
       ]
     },
     {
@@ -78,13 +104,58 @@
       "serviceType": "Clases particulares de idiomas",
       "description": "Clases individuales y grupales de inglés y español, presenciales en Ámsterdam u online, con programas personalizados.",
       "url": "https://lorenariveira.com/clases.html",
-      "provider": { "@id": "https://lorenariveira.com/#lorena" },
-      "areaServed": [{ "@type": "City", "name": "Ámsterdam" }],
-      "availableLanguage": [
-        { "@type": "Language", "name": "Español", "alternateName": "es" },
-        { "@type": "Language", "name": "Inglés", "alternateName": "en" }
+      "provider": {
+        "@id": "https://lorenariveira.com/#lorena"
+      },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Ámsterdam"
+        }
       ],
-      "audience": { "@type": "Audience", "audienceType": "Adolescentes y adultos" }
+      "availableLanguage": [
+        {
+          "@type": "Language",
+          "name": "Español",
+          "alternateName": "es"
+        },
+        {
+          "@type": "Language",
+          "name": "Inglés",
+          "alternateName": "en"
+        }
+      ],
+      "audience": {
+        "@type": "Audience",
+        "audienceType": "Adolescentes y adultos"
+      },
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Clase de prueba",
+          "description": "Sesión de 30 minutos: entrevista para determinar nivel y objetivos, más una actividad oral breve.",
+          "price": 0,
+          "priceCurrency": "EUR"
+        },
+        {
+          "@type": "Offer",
+          "name": "Clases individuales",
+          "priceCurrency": "EUR",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "priceCurrency": "EUR",
+            "minPrice": 45,
+            "unitCode": "HUR"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "Paquete de 12 horas",
+          "price": 480,
+          "priceCurrency": "EUR",
+          "description": "Pago por adelantado."
+        }
+      ]
     }
   ]
 }
@@ -100,6 +171,7 @@
     <nav class="nav" aria-label="Navegación principal">
       <a href="index.html">Inicio</a>
       <a href="clases.html" aria-current="page">¿Cómo son las clases?</a>
+      <a href="#precios">Precios</a>
       <a href="#contacto">Contacto</a>
     </nav>
   </div>
@@ -113,11 +185,12 @@
         <h1>¿Cómo son las clases?</h1>
         <p class="portada__entradilla">Clases pensadas alrededor de ti: tu nivel, tus objetivos y tu ritmo.</p>
         <ul class="datos">
-          <li>Más de 14 años de experiencia</li>
-          <li>Profesora CELTA</li>
-          <li>Online y presencial</li>
           <li>Enfoque comunicativo</li>
           <li>Programas personalizados</li>
+          <li>Online y presencial</li>
+          <li>Todos los niveles</li>
+          <li>Profesora CELTA</li>
+          <li>Más de 14 años de experiencia</li>
         </ul>
       </div>
     </div>
@@ -198,7 +271,45 @@
     </div>
   </section>
 
-  <section class="seccion contacto" id="contacto" aria-labelledby="contacto-titulo">
+  <section class="seccion" id="precios" aria-labelledby="precios-titulo">
+    <div class="contenedor">
+      <h2 id="precios-titulo" class="titulo-centrado">Precios y clase de prueba</h2>
+
+      <div class="prueba">
+        <p class="prueba__etiqueta">Clase de prueba gratuita · 30 minutos</p>
+        <p>Antes de empezar nos vemos media hora, sin coste. Hacemos una entrevista para
+        determinar tu nivel y tus objetivos, y una actividad oral breve para que pruebes
+        cómo enseño.</p>
+      </div>
+
+      <ul class="precios">
+        <li class="precio">
+          <p class="precio__nombre">Clases individuales</p>
+          <p class="precio__cifra">desde 45 €<span>por hora</span></p>
+          <p class="precio__nota">La clase estándar dura hora y media.</p>
+        </li>
+        <li class="precio">
+          <p class="precio__nombre">Paquete de 12 horas</p>
+          <p class="precio__cifra">480 €<span>en total</span></p>
+          <p class="precio__nota">Sale a 40 € la hora. Pago por adelantado.</p>
+        </li>
+      </ul>
+
+      <p class="precios__aclaracion">* Estos precios son de clases estándar. El idioma
+      para negocios, el académico y el profesional se preparan aparte y tienen otra
+      tarifa. Si buscas algo así, escríbeme y lo vemos.</p>
+
+      <ul class="datos datos--precios">
+        <li>Precios finales</li>
+        <li>Todos los niveles</li>
+        <li>Modalidad a convenir contigo</li>
+      </ul>
+
+      <p class="precios__accion"><a class="boton" href="mailto:info@lorenariveira.com?subject=Reserva%20de%20clase%20de%20prueba&amp;body=Hola%20Lorena%2C%20me%20gustar%C3%ADa%20reservar%20la%20clase%20de%20prueba%20de%2030%20minutos." target="_blank" rel="noopener">Reserva tu clase de prueba</a></p>
+    </div>
+  </section>
+
+  <section class="seccion seccion--alt contacto" id="contacto" aria-labelledby="contacto-titulo">
     <div class="contenedor">
       <h2 id="contacto-titulo">¿Empezamos?</h2>
       <p>No dudes en contactarme con preguntas o solicitudes especiales.</p>

@@ -79,6 +79,51 @@ Para regenerarlas, pide el CSS a Google con un `User-Agent` de navegador moderno
 (si no, devuelve `ttf` en vez de `woff2`), quédate con los bloques `latin` y
 `latin-ext` y descarga sus URL.
 
+## Precios y clase de prueba
+
+Publicados el 4 de agosto de 2026, en `clases.html` y **solo ahí**. La portada no
+lleva cifras: enlaza a `clases.html#precios` desde el menú, que está en las dos
+páginas. Es deliberado, para no tener el mismo número en dos archivos que hay que
+sincronizar a mano.
+
+Lo que se publica: clase de prueba **gratuita de 30 minutos** (entrevista de nivel y
+objetivos más una actividad oral breve), clases individuales **desde 45 € la hora**,
+**paquete de 12 horas por 480 € con pago por adelantado** y clase estándar de **hora
+y media**. Todos los niveles y modalidad a convenir.
+
+La letra pequeña con `*` bajo las dos tarjetas acota que esas tarifas son de clases
+estándar: el idioma para negocios, el académico y el profesional van aparte y se
+consultan.
+
+**Cuidado al cambiar un precio: aparece en dos sitios del mismo archivo.** En el
+HTML visible y en el `offers` del JSON-LD. Si tocas uno y no el otro, el sitio le
+está diciendo a Google un precio distinto del que lee la persona. Los valores que
+tienen que coincidir son `minPrice` (45) y el `price` del paquete (480).
+
+**El botón «Reserva tu clase de prueba» va al final de la sección, después de las
+cifras, y no dentro del bloque de la clase de prueba.** Es decisión de Lorena y
+tiene su lógica: quien lo pulsa ya ha visto lo que cuesta, así que no llegan
+consultas de gente que se va en cuanto oye el precio.
+
+Abre un `mailto:` con asunto («Reserva de clase de prueba») y cuerpo ya escritos, no
+un salto a `#contacto`. La primera versión iba al ancla y era casi decorativa: la
+sección de contacto está inmediatamente debajo, así que el botón solo hacía scroll a
+algo que ya se veía. Con el `mailto:` hace algo que la sección de abajo no puede,
+que es decir a qué viene la persona.
+
+Que apunte a un solo canal es asumible **precisamente porque el contacto está justo
+debajo**, con su propio fondo y sus dos botones: quien no use correo sigue bajando y
+encuentra WhatsApp. Si algún día esa sección deja de ir seguida de la de contacto,
+este botón vuelve a necesitar las dos vías.
+
+**Lorena decidió no mencionar el IVA ni el CRKBO por ahora**, y en su lugar la
+página dice "Precios finales". No lo cambies por iniciativa propia: la exención de
+BTW por el registro CRKBO es un argumento comercial fuerte, se le propuso con esos
+datos y prefirió dejarlo fuera de momento.
+
+Pendiente de esa misma tanda: los exámenes que prepara (`clases.html` solo dice
+"exámenes internacionales", sin nombrarlos) y una sección de preguntas frecuentes.
+
 ## Datos estructurados (JSON-LD)
 
 Añadido el 4 de agosto de 2026. `index.html` y `clases.html` llevan **el mismo
@@ -96,8 +141,12 @@ Dos cosas que hay que respetar:
 
 Tampoco lleva `aggregateRating` ni `review` pese a haber cuatro testimonios reales:
 las valoraciones que se pone a sí mismo el propio negocio no dan resultados
-enriquecidos y es terreno resbaladizo. Y no lleva `offers` porque todavía no hay
-precios publicados; si algún día los hay, ese es su sitio.
+enriquecidos y es terreno resbaladizo.
+
+El nodo `Service` sí lleva `offers` desde que hay precios: la clase de prueba a 0 €,
+las individuales con `UnitPriceSpecification` y `minPrice` 45 por hora (`unitCode`
+`HUR`, que es «hora»), y el paquete de 12 horas a 480 €. Tienen que cuadrar con lo
+que se ve en la página; ver la sección de precios más arriba.
 
 ## Comandos
 
@@ -201,6 +250,16 @@ revelado.
 
 **`.destacado` es más estrecha que el carrusel a propósito** (46rem frente a 52rem),
 para que la cita conserve su jerarquía respecto a la caja de testimonios.
+
+**Los fondos de las secciones alternan, y esa alternancia es lo único que las
+separa.** `.seccion` va sobre el crema de la página y `.seccion--alt` lleva
+`--crema-alt`; no hay bordes ni sombras entre secciones. Si dos consecutivas
+comparten fondo, se funden en un solo bloque y el lector pierde de vista dónde
+acaba una. Al añadir la sección de precios pasó exactamente eso: precios y contacto
+quedaron las dos en crema, y por eso el contacto de `clases.html` lleva
+`seccion--alt` y el de `index.html` no. **No es una inconsistencia entre páginas: es
+que cada una tiene un número distinto de secciones antes.** Al insertar o mover una
+sección, recorre la página entera y comprueba que sigan alternando.
 
 ## JavaScript: nada debe depender de él
 

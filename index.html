@@ -23,7 +23,9 @@
       "url": "https://lorenariveira.com/",
       "name": "Lorena Riveira — Language Instructor",
       "inLanguage": "es",
-      "publisher": { "@id": "https://lorenariveira.com/#lorena" }
+      "publisher": {
+        "@id": "https://lorenariveira.com/#lorena"
+      }
     },
     {
       "@type": "Person",
@@ -34,10 +36,20 @@
       "url": "https://lorenariveira.com/",
       "image": "https://lorenariveira.com/assets/img/lorena-retrato.jpg",
       "email": "info@lorenariveira.com",
-      "sameAs": ["https://www.linkedin.com/in/lorenariveira"],
+      "sameAs": [
+        "https://www.linkedin.com/in/lorenariveira"
+      ],
       "knowsLanguage": [
-        { "@type": "Language", "name": "Español", "alternateName": "es" },
-        { "@type": "Language", "name": "Inglés", "alternateName": "en" }
+        {
+          "@type": "Language",
+          "name": "Español",
+          "alternateName": "es"
+        },
+        {
+          "@type": "Language",
+          "name": "Inglés",
+          "alternateName": "en"
+        }
       ],
       "hasCredential": {
         "@type": "EducationalOccupationalCredential",
@@ -49,7 +61,9 @@
         "addressLocality": "Ámsterdam",
         "addressCountry": "NL"
       },
-      "worksFor": { "@id": "https://lorenariveira.com/#negocio" }
+      "worksFor": {
+        "@id": "https://lorenariveira.com/#negocio"
+      }
     },
     {
       "@type": "Organization",
@@ -57,9 +71,15 @@
       "name": "Lorena Riveira Language Instructor",
       "url": "https://lorenariveira.com/",
       "email": "info@lorenariveira.com",
-      "founder": { "@id": "https://lorenariveira.com/#lorena" },
+      "founder": {
+        "@id": "https://lorenariveira.com/#lorena"
+      },
       "identifier": [
-        { "@type": "PropertyValue", "name": "KvK", "value": "78123526" }
+        {
+          "@type": "PropertyValue",
+          "name": "KvK",
+          "value": "78123526"
+        }
       ],
       "address": {
         "@type": "PostalAddress",
@@ -67,8 +87,14 @@
         "addressCountry": "NL"
       },
       "areaServed": [
-        { "@type": "City", "name": "Ámsterdam" },
-        { "@type": "Country", "name": "Países Bajos" }
+        {
+          "@type": "City",
+          "name": "Ámsterdam"
+        },
+        {
+          "@type": "Country",
+          "name": "Países Bajos"
+        }
       ]
     },
     {
@@ -78,13 +104,58 @@
       "serviceType": "Clases particulares de idiomas",
       "description": "Clases individuales y grupales de inglés y español, presenciales en Ámsterdam u online, con programas personalizados.",
       "url": "https://lorenariveira.com/clases.html",
-      "provider": { "@id": "https://lorenariveira.com/#lorena" },
-      "areaServed": [{ "@type": "City", "name": "Ámsterdam" }],
-      "availableLanguage": [
-        { "@type": "Language", "name": "Español", "alternateName": "es" },
-        { "@type": "Language", "name": "Inglés", "alternateName": "en" }
+      "provider": {
+        "@id": "https://lorenariveira.com/#lorena"
+      },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Ámsterdam"
+        }
       ],
-      "audience": { "@type": "Audience", "audienceType": "Adolescentes y adultos" }
+      "availableLanguage": [
+        {
+          "@type": "Language",
+          "name": "Español",
+          "alternateName": "es"
+        },
+        {
+          "@type": "Language",
+          "name": "Inglés",
+          "alternateName": "en"
+        }
+      ],
+      "audience": {
+        "@type": "Audience",
+        "audienceType": "Adolescentes y adultos"
+      },
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Clase de prueba",
+          "description": "Sesión de 30 minutos: entrevista para determinar nivel y objetivos, más una actividad oral breve.",
+          "price": 0,
+          "priceCurrency": "EUR"
+        },
+        {
+          "@type": "Offer",
+          "name": "Clases individuales",
+          "priceCurrency": "EUR",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "priceCurrency": "EUR",
+            "minPrice": 45,
+            "unitCode": "HUR"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "Paquete de 12 horas",
+          "price": 480,
+          "priceCurrency": "EUR",
+          "description": "Pago por adelantado."
+        }
+      ]
     }
   ]
 }
@@ -100,6 +171,7 @@
     <nav class="nav" aria-label="Navegación principal">
       <a href="index.html" aria-current="page">Inicio</a>
       <a href="clases.html">¿Cómo son las clases?</a>
+      <a href="clases.html#precios">Precios</a>
       <a href="#contacto">Contacto</a>
     </nav>
   </div>
