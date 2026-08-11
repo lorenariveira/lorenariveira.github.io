@@ -15,9 +15,10 @@ Manténlo así.
 
 ## Los dos botones de contacto
 
-Acordado el 4 de agosto de 2026. Los dos botones están en `index.html` y en
-`clases.html`, y **cualquier cambio en uno va en el otro en la misma tanda**: es
-donde ya se separaron una vez.
+Acordado el 4 de agosto de 2026. Desde que existe la versión inglesa **están en
+cuatro páginas** —`index.html`, `clases.html`, `en/index.html` y `en/lessons.html`—
+y **cualquier cambio en uno va en los otros en la misma tanda**: es donde ya se
+separaron una vez. Los dos llevan icono desde el 11 de agosto de 2026.
 
 El de correo lleva el asunto puesto:
 `mailto:info@lorenariveira.com?subject=Contacto%20desde%20lorenariveira.com`. Los
@@ -461,3 +462,14 @@ Los seis iconos de `clases.html` van en línea en el HTML, con `stroke="currentC
 para heredar el color del tema. Se redibujaron con un trazo único a partir de los
 conceptos de los iconos originales de Wix, que venían cada uno de un color distinto.
 Si añades uno, respeta el `viewBox="0 0 24 24"` y el `stroke-width="1.5"`.
+
+**Los iconos de dentro de un botón son macizos, y no es una incoherencia.** La regla
+`.boton svg { fill: currentColor }` rellena cualquier SVG que se meta en un botón,
+así que un icono de trazo saldría de mancha: el `fill="none"` del atributo pierde
+contra la hoja de estilos. Por eso el de WhatsApp y el sobre del botón de correo
+—añadido el 11 de agosto de 2026— están dibujados como siluetas rellenas.
+
+El sobre lleva `fill-rule="evenodd"` y dos subtrazados: el cuerpo y una banda en
+uve que le abre la solapa. Con la regla de relleno por defecto no habría hueco y
+saldría un rectángulo liso, así que **si tocas el `d`, no le quites el
+`fill-rule`**.
