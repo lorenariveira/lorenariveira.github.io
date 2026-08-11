@@ -214,27 +214,77 @@ getent hosts lorenariveira.com www.lorenariveira.com
 curl -sS -o /dev/null -D - https://lorenariveira.com/
 ```
 
-## Pendiente: la versión en inglés
+## La versión en inglés
 
-Acordado el 29 de julio de 2026, sin empezar todavía. Alcance: solo `index.html` y
-`clases.html`. `practica/` se queda en español.
+Acordada el 29 de julio de 2026 y escrita el 11 de agosto. Alcance: solo
+`index.html` y `clases.html`. `practica/` se queda en español.
 
-GitHub Pages no puede traducir nada: es alojamiento estático. La versión inglesa se
-escribe a mano y vive en `/en/`, con los nombres de archivo en inglés
-—`/en/index.html` y `/en/classes.html`— que es la única excepción acordada a la
+GitHub Pages no puede traducir nada: es alojamiento estático. La versión inglesa
+está escrita a mano y vive en `/en/`, con los nombres de archivo en inglés
+—`/en/index.html` y `/en/lessons.html`— que es la única excepción acordada a la
 regla de nombrar los archivos en español: una URL la lee el visitante, no el código.
-Desde `/en/` los recursos se referencian como `../assets/`. Hay que poner `hreflang`
-recíproco entre cada par de páginas y cambiar `og:locale` a `en_US`. El bloque de
-JSON-LD también viaja: con `inLanguage` en `en` y las URL de `/en/`, pero
-reutilizando los mismos `@id` para que Google entienda que es la misma persona y el
-mismo negocio, no dos.
+**La excepción llega hasta ahí**: los `id`, las clases y las anclas siguen en
+español también en `/en/` (`#precios`, `#contacto`, `#contenido`), porque eso es
+código y lo comparten las dos versiones a través de la misma hoja de estilos.
 
-El botón de cambio de idioma va en la cabecera de las cuatro páginas, y cada uno
-enlaza a su equivalente, no a la portada.
+Desde `/en/` los recursos se referencian como `../assets/`. Cada página lleva
+`hreflang` recíproco más `x-default` apuntando al español, que es el idioma de
+partida del sitio. El bloque de JSON-LD viaja con `inLanguage` en `en`, las URL de
+`/en/` y los textos traducidos, pero **reutilizando los mismos `@id`** para que
+Google entienda que es la misma persona y el mismo negocio, no dos.
+
+**Los asuntos de los `mailto:` están en inglés en las páginas inglesas** ("Contact
+from lorenariveira.com" y "Trial class booking"). No es un descuido: al visitante le
+llega el asunto en su idioma, y a Lorena le dice de qué versión del sitio viene
+quien escribe. Si cambias un asunto, son cuatro los que hay que revisar, dos por
+idioma.
+
+### El selector de idioma
+
+Va en la cabecera de las cuatro páginas, centrado entre la marca y el menú, y cada
+uno enlaza a su equivalente, no a la portada. Es decisión de Lorena del 11 de agosto
+de 2026, después de descartar una franja aparte encima de la cabecera.
+
+**Es un `<details>` con su `<summary>`, y tiene que seguir siéndolo.** Abre y cierra
+sin una línea de JavaScript, así que cambiar de idioma funciona con los scripts
+bloqueados. Convertirlo en un menú de `<button>` con JS rompería la regla de que
+nada del sitio dependa de él, y justo en el control que necesita quien no entiende
+la página que está viendo.
+
+Para centrarlo, **`.cabecera__inner` es una rejilla `1fr auto 1fr`, no un flex con
+`space-between`**: con flex el selector quedaría a medio camino entre la marca y el
+menú, que miden distinto, en vez de en el centro de la ventana. En móvil la rejilla
+pasa a una sola columna y los tres bloques se apilan centrados.
+
+El menú desplegado va en `position: absolute` para que abrirlo no empuje la cabecera.
+En móvil tapa el menú de navegación mientras está abierto, y así se queda: es lo que
+hace un desplegable.
 
 **El testimonio de Gabriela T. se queda en español, sin traducir**, con `lang="es"`.
 Es la misma regla que ya sigue la página española al dejar en inglés los otros tres:
-cada testimonio conserva las palabras que escribió cada estudiante.
+cada testimonio conserva las palabras que escribió cada estudiante. Por eso los tres
+ingleses aparecen en `/en/` **con su texto original**, no traducidos de vuelta desde
+el español.
+
+### «Lessons», no «classes»
+
+Decidido el 11 de agosto de 2026. En inglés **lesson** es la sesión de enseñanza
+—la palabra de las clases particulares: *private lessons*, *trial lesson*— mientras
+que **class** es más bien el grupo de estudiantes o la sesión de un curso con grupo.
+El americano estira *classes* hasta cubrir las dos, pero lo que vende Lorena es
+enseñanza individual, así que toda la versión inglesa dice *lessons*: en el texto,
+en los titulares, en el JSON-LD y en el nombre del archivo.
+
+La excepción es **grupo**, donde *group classes* sí es lo natural. Y los testimonios
+no se tocan: el de Micheline T. dice "group classes" y "the classes" porque lo
+escribió ella.
+
+**Pendiente: que Lorena revise la redacción inglesa**, que es un borrador mío. Y una
+decisión suya que no he tomado por ella: `og:locale` dice `en_US` porque así se
+acordó en julio, y el texto está escrito esquivando las palabras que se escriben
+distinto en inglés británico y americano. Si prefiere una de las dos variantes
+—enseñando en Ámsterdam lo normal sería la británica—, hay que fijarla en el texto y
+poner `og:locale` acorde.
 
 **No hay plantillas ni compilación, así que las dos versiones no se sincronizan
 solas: todo cambio en `index.html` o `clases.html` hay que replicarlo a mano en
