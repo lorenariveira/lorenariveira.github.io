@@ -5,13 +5,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Qué es esto
 
 El sitio web de Lorena Riveira, profesora de idiomas en Ámsterdam, migrado desde
-Wix a GitHub Pages en julio de 2026. Dos páginas estáticas en español: `index.html`
-(Inicio) y `clases.html` (¿Cómo son las clases?). La página de reservas de Wix no
-se migró a propósito: el contacto es directo por WhatsApp y email.
+Wix a GitHub Pages en julio de 2026. Cuatro páginas estáticas, dos por idioma:
+`index.html` (Inicio) y `clases.html` (¿Cómo son las clases?) en español, más
+`en/index.html` y `en/lessons.html` en inglés desde el 11 de agosto de 2026. La
+página de reservas de Wix no se migró a propósito: el contacto es directo por
+WhatsApp y email.
 
 **El idioma del proyecto es el español**: los nombres de clases CSS, de archivos, de
 variables JavaScript, los comentarios y los mensajes de commit están en español.
-Manténlo así.
+Manténlo así. La única excepción son los dos nombres de archivo de `/en/`, y el
+motivo está en la sección de la versión inglesa.
 
 ## Los dos botones de contacto
 
@@ -33,7 +36,7 @@ comprueba que el otro sigue teniendo sentido.
 
 ### El enlace de WhatsApp no lleva el número
 
-Las dos páginas apuntan a
+Las cuatro páginas apuntan a
 `https://wa.me/qr/J2IYGOXS4OORE1`, el enlace corto del código QR, **no** a
 `wa.me/<número>`. El motivo es que el repositorio es público y un número escrito en
 el HTML se lee tanto en el sitio como en GitHub, al alcance de cualquier bot que
@@ -59,7 +62,8 @@ en `practica/`.
 
 ## Las tipografías se sirven desde aquí, no desde Google
 
-Cambiado el 4 de agosto de 2026. Las ocho páginas cargaban Fraunces e Inter desde
+Cambiado el 4 de agosto de 2026. Todas las páginas del sitio —ocho entonces, diez
+desde que existe la versión inglesa— cargaban Fraunces e Inter desde
 `fonts.googleapis.com`, y eso entrega la IP de cada visitante a Google antes de que
 la página termine de cargar y sin que nadie haya consentido nada. La IP es dato
 personal; el Tribunal Regional de Múnich condenó por esto en enero de 2022, con el
@@ -97,10 +101,15 @@ Para regenerarlas, pide el CSS a Google con un `User-Agent` de navegador moderno
 
 ## Precios y clase de prueba
 
-Publicados el 4 de agosto de 2026, en `clases.html` y **solo ahí**. La portada no
-lleva cifras: enlaza a `clases.html#precios` desde el menú, que está en las dos
-páginas. Es deliberado, para no tener el mismo número en dos archivos que hay que
-sincronizar a mano.
+Publicados el 4 de agosto de 2026, en `clases.html` y **solo ahí** —y desde el 11 de
+agosto, en `en/lessons.html` y solo ahí—. Las portadas no llevan cifras: enlazan a
+`#precios` de la página de clases desde el menú, que está en las cuatro páginas. Es
+deliberado, para no tener el mismo número en más archivos de los necesarios, que hay
+que sincronizar a mano.
+
+Con la versión inglesa, **cada cifra vive ahora en cuatro sitios**: el HTML y el
+JSON-LD de `clases.html`, y el HTML y el JSON-LD de `en/lessons.html`. Cambiar un
+precio son cuatro ediciones, no dos.
 
 Lo que se publica: clase de prueba **gratuita de 30 minutos** (entrevista de nivel y
 objetivos más una actividad oral breve), clases individuales **desde 45 € la hora**,
@@ -110,6 +119,11 @@ y media**. Todos los niveles y modalidad a convenir.
 La letra pequeña con `*` bajo las dos tarjetas acota que esas tarifas son de clases
 estándar: el idioma para negocios, el académico y el profesional van aparte y se
 consultan.
+
+**El paquete no dice a cuánto sale la hora.** Hasta el 11 de agosto de 2026 la nota
+añadía «Sale a 40 € la hora» y Lorena la quitó, en las dos versiones. No la
+reintroduzcas por parecer más claro: quien quiera la cuenta la hace, y el 40 no
+está en ningún sitio más del sitio ni de los datos estructurados.
 
 **Cuidado al cambiar un precio: aparece en dos sitios del mismo archivo.** En el
 HTML visible y en el `offers` del JSON-LD. Si tocas uno y no el otro, el sitio le
@@ -153,6 +167,11 @@ bloque `application/ld+json`**, un `@graph` con cuatro nodos: `WebSite`, `Person
 `Organization` y `Service`. Es idéntico en las dos a propósito, para que haya una
 sola cosa que mantener; si tocas uno, toca el otro.
 
+Las dos páginas de `/en/` llevan **su propia pareja**, también idéntica entre sí:
+mismos `@id`, pero `inLanguage` en `en`, las URL de `/en/` y los textos traducidos.
+O sea que hay dos bloques que mantener, no uno, y tocar el español obliga a mirar el
+inglés. Los detalles están en la sección de la versión en inglés.
+
 Dos cosas que hay que respetar:
 
 - **Es `Organization`, no `LocalBusiness`.** La documentación de Google reserva los
@@ -189,8 +208,9 @@ google-chrome-stable --headless --no-sandbox --hide-scrollbars \
 ```
 
 El alto de la ventana tiene que superar al de la página o la captura sale cortada
-por abajo sin avisar. A 4 de agosto de 2026 `clases.html` mide unos 5100 px en
-móvil, así que 5000 ya no basta. Comprueba el número que devuelve el recorte: si
+por abajo sin avisar. Medidas a 390 px de ancho el 11 de agosto de 2026:
+`index.html` 3645, `clases.html` 5114, `en/index.html` 3573 y `en/lessons.html`
+4870. Pide 7000 y vas sobrado. Comprueba el número que devuelve el recorte: si
 coincide con el alto que pediste, casi seguro que se cortó.
 
 El recorte a la altura real del contenido se hace con ImageMagick:
@@ -214,6 +234,27 @@ al dominio sin `www`. Para verificarlo sin depender del navegador:
 getent hosts lorenariveira.com www.lorenariveira.com
 curl -sS -o /dev/null -D - https://lorenariveira.com/
 ```
+
+**Lo recién publicado tarda hasta diez minutos en verse en un navegador que ya
+tuviera la página abierta.** GitHub Pages sirve los recursos con
+`cache-control: max-age=600`, y ese encabezado autoriza al navegador a reutilizar su
+copia sin ni siquiera preguntar si cambió. El 11 de agosto de 2026 pasó exactamente
+eso: el Firefox de Lorena mostró el HTML nuevo con el `style.css` viejo, y el
+selector de idioma salió sin ninguno de sus estilos —con el triangulito de serie del
+`<summary>` y los SVG a tamaño natural—, mientras que en Chrome se veía bien.
+
+**Antes de dar por roto algo que solo falla en un navegador, descarta la caché.** Se
+comprueba así, y no hace falta creer en la palabra de nadie:
+
+```bash
+curl -sS https://lorenariveira.com/assets/css/style.css | grep -c idiomas__actual
+firefox --headless --profile "$(mktemp -d)" --window-size 1280,900 \
+  --screenshot captura.png https://lorenariveira.com/
+```
+
+Lo primero dice si lo publicado tiene de verdad la regla. Lo segundo abre el sitio en
+un Firefox con perfil nuevo, es decir sin caché ninguna. A Lorena, recarga forzada
+(Ctrl+Shift+R) o ventana privada.
 
 ## La versión en inglés
 
@@ -410,7 +451,8 @@ sección, recorre la página entera y comprueba que sigan alternando.
 ## JavaScript: nada debe depender de él
 
 Los tres scripts de `assets/js/` son opcionales por diseño y esa propiedad hay que
-conservarla.
+conservarla. El selector de idioma tampoco usa JavaScript, y por eso es un
+`<details>`; está explicado en su sección.
 
 `assets/js/revelar.js` añade la clase `con-revelado` al `<html>` **solo cuando de
 verdad va a animar**. Todo el CSS que oculta elementos cuelga de esa clase, así que
