@@ -443,9 +443,16 @@ p:last-child { margin-bottom: 0; }
 }
 
 /* Tarjetas --------------------------------------------------------- */
+/* El mínimo de 20rem no es estético: es el ancho por debajo del cual los
+   títulos de tres palabras largas ya no caben en una línea. Con 17rem la
+   rejilla mantenía tres columnas hasta ventanas de 1024 px, y ahí el
+   título más largo de cada idioma partía en dos y descuadraba la fila.
+   Con 20rem la tercera columna se cae antes y las tarjetas nunca bajan de
+   un ancho legible. Si tocas este valor, comprueba los títulos a 1024 px
+   en `clases.html` y en `en/lessons.html`, que son los que primero parten. */
 .tarjetas {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
   gap: 1.5rem;
   list-style: none;
   padding: 0;
@@ -470,7 +477,14 @@ p:last-child { margin-bottom: 0; }
   box-shadow: 0 3px 6px rgb(47 39 35 / .06), 0 20px 44px rgb(47 39 35 / .13);
 }
 
-.tarjeta h3 { color: var(--terracota-o); margin-bottom: .55rem; text-align: center; }
+/* Algo menor que el h3 general (1.2rem) para que el título más largo entre
+   en una línea con holgura en la tarjeta más estrecha de tres columnas. */
+.tarjeta h3 {
+  color: var(--terracota-o);
+  font-size: 1.12rem;
+  margin-bottom: .55rem;
+  text-align: center;
+}
 .tarjeta p { color: var(--tinta-suave); font-size: 1rem; }
 
 .tarjeta__icono {

@@ -382,6 +382,20 @@ revelado.
 **`.destacado` es más estrecha que el carrusel a propósito** (46rem frente a 52rem),
 para que la cita conserve su jerarquía respecto a la caja de testimonios.
 
+**El mínimo de `.tarjetas` (20rem) y el `font-size` de `.tarjeta h3` (1.12rem) están
+atados entre sí y a la longitud de los títulos.** Ajustado el 11 de agosto de 2026:
+con el mínimo anterior de 17rem la rejilla aguantaba tres columnas hasta ventanas de
+1024 px, y a ese ancho el título más largo de cada idioma —"Technology at the cutting
+edge" y "Profesionalidad y experiencia"— partía en dos líneas y descuadraba la fila
+entera. Ahora la tercera columna se cae hacia los 1070 px y la segunda hacia los
+710 px. Comprobado de 320 a 1440 px en las dos páginas: ningún título parte.
+
+Si alguien añade una tarjeta con un título más largo que esos dos, o sube el
+`font-size`, vuelve a partir. La forma de comprobarlo sin ir mirando capturas es
+medir los rectángulos de línea de cada `h3` dentro de un `<iframe>` del ancho que se
+quiera probar: `range.selectNodeContents(h3)` y contar `range.getClientRects()`, que
+devuelve uno por línea.
+
 **Los fondos de las secciones alternan, y esa alternancia es lo único que las
 separa.** `.seccion` va sobre el crema de la página y `.seccion--alt` lleva
 `--crema-alt`; no hay bordes ni sombras entre secciones. Si dos consecutivas
