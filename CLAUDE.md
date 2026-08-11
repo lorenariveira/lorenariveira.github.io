@@ -279,12 +279,30 @@ La excepción es **grupo**, donde *group classes* sí es lo natural. Y los testi
 no se tocan: el de Micheline T. dice "group classes" y "the classes" porque lo
 escribió ella.
 
-**Pendiente: que Lorena revise la redacción inglesa**, que es un borrador mío. Y una
-decisión suya que no he tomado por ella: `og:locale` dice `en_US` porque así se
-acordó en julio, y el texto está escrito esquivando las palabras que se escriben
-distinto en inglés británico y americano. Si prefiere una de las dos variantes
-—enseñando en Ámsterdam lo normal sería la británica—, hay que fijarla en el texto y
-poner `og:locale` acorde.
+### La variedad de inglés es la británica
+
+Decidido por Lorena el 11 de agosto de 2026, y sustituye al `en_US` que se había
+acordado en julio: `og:locale` dice ahora **`en_GB`** en las dos páginas de `/en/`.
+
+Las cuatro grafías que hay que respetar al escribir texto inglés nuevo:
+
+- **`-ise`, no `-ize`**: `personalised`.
+- **`-re`, no `-er`**: `centred`.
+- **`programme`** para un plan o un curso; `program` se reserva a la informática, que
+  aquí no aparece.
+- **`practise`** cuando es verbo ("practise it comfortably from home").
+
+Si alguna vez se cambia de variedad, hay que recorrer las dos páginas enteras y tocar
+también `og:locale`.
+
+Los testimonios no entran en esto: el de Micheline T. dice "skillfully", que es la
+grafía americana, y se queda como lo escribió ella.
+
+**El «About me» de `/en/index.html` lo escribió Lorena**, el 11 de agosto de 2026,
+sobre un borrador mío. Como la entradilla de la portada española, no lo reescribas.
+
+**Pendiente: que Lorena revise el resto de la redacción inglesa**, que sigue siendo
+borrador mío.
 
 **No hay plantillas ni compilación, así que las dos versiones no se sincronizan
 solas: todo cambio en `index.html` o `clases.html` hay que replicarlo a mano en
