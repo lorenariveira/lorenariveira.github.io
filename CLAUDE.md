@@ -136,8 +136,14 @@ página dice "Precios finales". No lo cambies por iniciativa propia: la exenció
 BTW por el registro CRKBO es un argumento comercial fuerte, se le propuso con esos
 datos y prefirió dejarlo fuera de momento.
 
-Pendiente de esa misma tanda: los exámenes que prepara (`clases.html` solo dice
-"exámenes internacionales", sin nombrarlos) y una sección de preguntas frecuentes.
+**Los exámenes no se nombran.** Decidido el 11 de agosto de 2026: `clases.html`
+dice "exámenes internacionales" y así se queda. No lo conviertas en una lista de
+siglas ni preguntes cuáles son para "completarlo".
+
+**Tampoco habrá una sección de preguntas frecuentes aparte.** Esa función ya la
+cumple `clases.html`, que es literalmente la página "¿Cómo son las clases?": si
+alguna vez hay una duda recurrente que responder, se responde ahí, en las tarjetas
+o en la sección de precios, no en un bloque nuevo de preguntas y respuestas.
 
 ## Datos estructurados (JSON-LD)
 
@@ -236,19 +242,17 @@ solas: todo cambio en `index.html` o `clases.html` hay que replicarlo a mano en
 sitio cuya gracia es no tenerlo, y el riesgo real es que las dos versiones se
 separen sin que nadie lo note.
 
-## Los textos vienen de Wix y son literales
+## Los textos son de Lorena
 
-Todo el contenido se copió palabra por palabra del sitio original y se verificó
-carácter a carácter, incluidos apóstrofos tipográficos y signos dobles. **No los
-reescribas, resumas ni "mejores" sin que Lorena lo pida.** Las excepciones ya
-acordadas: se quitó "reservas" de la entradilla de portada (esa página no existe) y
-los años de experiencia se actualizaron a 14.
+Actualizado el 11 de agosto de 2026: **los textos ya no vienen de Wix**. El sitio
+antiguo dejó de ser la referencia, y la razón de esta sección ya no es la fidelidad
+a aquella copia sino que el contenido es de Lorena. **No lo reescribas, resumas ni
+"mejores" sin que ella lo pida**, y tampoco lo "restaures" a ninguna versión
+anterior.
 
 **La portada de `index.html` se reescribió el 4 de agosto de 2026 a petición de
-Lorena**, para que su nombre y su servicio fueran lo primero que se ve. De Wix
-venían el titular "Clases de inglés y español / individuales y grupales" y la
-entradilla "Echa un vistazo para enterarte sobre las clases y mucho más."; los dos
-se sustituyeron. El titular actual, "Clases de inglés y español en Ámsterdam", se
+Lorena**, para que su nombre y su servicio fueran lo primero que se ve. El titular
+actual, "Clases de inglés y español en Ámsterdam", se
 armó con palabras que ya estaban en el sitio. **La entradilla la escribió Lorena**
 —"Te ayudo a aprender o mejorar tu inglés o español. Clases pensadas alrededor de
 ti: tu nivel, tus objetivos y tu ritmo."— y habla al lector de tú a propósito: no la
@@ -258,20 +262,17 @@ Ojo con `ti`: **no lleva tilde nunca**, ni siquiera cuando acompaña a un
 posesivo. Es la clase de errata que en el sitio de una profesora de idiomas se paga
 cara, así que revísalo cada vez que se toque este texto.
 
-Hay otros dos bloques que tampoco vienen de Wix y que no hay que "restaurar":
+Dos bloques los decidió ella directamente y no admiten reordenación por tu cuenta:
 toda la sección de precios de `clases.html`, y la lista de datos rápidos de su
-portada, que Lorena reordenó el 4 de agosto de 2026 hasta dejarla así: enfoque
+portada, que Lorena dejó así el 4 de agosto de 2026: enfoque
 comunicativo, programas personalizados, online y presencial, todos los niveles,
 profesora CELTA y más de 14 años de experiencia. El orden es intencionado —abre por
 el método y cierra por las credenciales—, así que no lo alfabetices ni lo agrupes
 por tu cuenta.
 
 Los testimonios están en el idioma en que los escribió cada estudiante: tres en
-inglés (con `lang="en"`) y uno en español. Wix solo renderizaba el primero en el
-HTML; los cuatro se recuperaron del JSON de datos del sitio. Si hiciera falta
-volver a esa fuente, el patrón es
-`https://pages.parastorage.com/sites/<pageJsonFileName>.json.z`, donde
-`pageJsonFileName` sale del `pagesMap` incrustado en el HTML de Wix.
+inglés (con `lang="en"`) y uno en español. Son palabras de otras personas: no se
+traducen, no se corrigen y no se abrevian.
 
 ## Detalles del CSS que parecen arbitrarios y no lo son
 
