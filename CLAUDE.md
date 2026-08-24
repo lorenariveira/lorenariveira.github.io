@@ -491,6 +491,21 @@ dos actividades que lo usan llevan una segunda vía —tocar origen y luego dest
 `preterito-indefinido.html`, flechas ▲▼ en `comida-y-lugares.html`— y cualquier
 actividad nueva con arrastre debe llevarla también.
 
+**Un toque en pantalla dispara `touchend` y después `click`.** Lo aprendimos al
+integrar `por-y-para.html` el 24 de agosto de 2026: su manejador de `touchend`
+giraba la tarjeta y el `click` que viene detrás la volvía a girar, así que en móvil
+—donde estudia la mayoría— parecía que no pasaba nada. La regla para cualquier
+actividad con gestos: en `touchend` se atiende **solo** el deslizamiento, con
+`e.preventDefault()` para que no llegue el `click`, y el toque simple se deja para
+el manejador de `click`.
+
+**Las tarjetas que se giran ocultan su reverso con `aria-hidden`.** La cara de atrás
+sigue en el HTML aunque `backface-visibility` la esconda, y un lector de pantalla la
+lee: cantaría la respuesta antes de que el estudiante la piense. En
+`por-y-para.html` el envoltorio es un `<button>` —para poder girarla con el
+teclado— con `aria-expanded`, y al girar se intercambia el `aria-hidden` de las dos
+caras y se anuncia la respuesta en una región `aria-live`.
+
 `assets/js/actividad.js` es el motor de las actividades de huecos. Una actividad
 nueva es solo HTML: un `<form data-quiz>`, un `<input data-respuesta="...">` por
 hueco —varias respuestas válidas separadas por `|`— y un `<p data-aviso>` dentro de
