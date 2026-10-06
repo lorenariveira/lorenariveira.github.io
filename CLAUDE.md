@@ -208,9 +208,9 @@ google-chrome-stable --headless --no-sandbox --hide-scrollbars \
 ```
 
 El alto de la ventana tiene que superar al de la página o la captura sale cortada
-por abajo sin avisar. Medidas a 390 px de ancho el 11 de agosto de 2026:
-`index.html` 3645, `clases.html` 5114, `en/index.html` 3573 y `en/lessons.html`
-4870. Pide 7000 y vas sobrado. Comprueba el número que devuelve el recorte: si
+por abajo sin avisar. Medidas a 390 px de ancho el 6 de octubre de 2026, con el menú plegable:
+`index.html` 3507, `clases.html` 4977, `en/index.html` 3480 y `en/lessons.html`
+4777. Pide 7000 y vas sobrado. Comprueba el número que devuelve el recorte: si
 coincide con el alto que pediste, casi seguro que se cortó.
 
 El recorte a la altura real del contenido se hace con ImageMagick:
@@ -295,12 +295,44 @@ la página que está viendo.
 
 Para centrarlo, **`.cabecera__inner` es una rejilla `1fr auto 1fr`, no un flex con
 `space-between`**: con flex el selector quedaría a medio camino entre la marca y el
-menú, que miden distinto, en vez de en el centro de la ventana. En móvil la rejilla
-pasa a una sola columna y los tres bloques se apilan centrados.
+menú, que miden distinto, en vez de en el centro de la ventana. En móvil la
+cabecera es una sola fila, `1fr auto auto`: la marca a la izquierda y el selector y
+el botón del menú juntos a la derecha (ver la sección siguiente).
 
 El menú desplegado va en `position: absolute` para que abrirlo no empuje la cabecera.
-En móvil tapa el menú de navegación mientras está abierto, y así se queda: es lo que
-hace un desplegable.
+
+**Por debajo de 390 px el selector enseña solo el globo**, sin el nombre del idioma,
+que sigue ahí para los lectores de pantalla. Es lo que hace caber la cabecera en una
+fila: a 360 px, el ancho de muchos Android, la marca partía en dos líneas. Por la
+misma razón, a esos anchos el subtítulo «Language Instructor» aprieta el espaciado
+entre letras. Si la marca o el selector crecen, vuelve a comprobarlo de 320 a 430 px
+en las dos lenguas: «English» y «Español» no miden lo mismo.
+
+### El menú plegable de móvil
+
+Pedido por Lorena el 6 de octubre de 2026, para móvil y tableta. Hasta 66rem
+(1056 px) el menú se pliega tras un botón de tres rayas, que pasa a ser una X al
+abrirlo, y se despliega como una franja a todo el ancho bajo la cabecera. Por encima
+no cambia nada: el menú se ve como siempre.
+
+**El corte es 66rem y no el 46rem del resto del diseño móvil.** El menú de ordenador
+parte en dos líneas hasta unos 1030 px en español y 980 px en inglés —el iPad en
+horizontal mide 1024—, y el plegable está para que eso no pase. Si se alarga el
+texto de un enlace del menú, vuelve a medir dónde parte: un `<iframe>` por ancho y
+contar cuántos `top` distintos tienen los enlaces de `.nav`. Entre 46 y 66rem la
+cabecera mantiene la rejilla de ordenador, con el selector centrado y el botón a la
+derecha; por debajo de 46rem pasa a la fila de móvil.
+
+**Es un `<details class="menu">`, igual que el selector de idioma y por lo mismo**:
+abre y cierra sin JavaScript. El truco para que en pantalla ancha se vea aunque el
+`<details>` esté cerrado es `::details-content { content-visibility: visible }`,
+dentro de un `@supports selector(::details-content)`. Un navegador antiguo que no lo
+conozca enseña el botón también en ordenador: peor, pero el menú sigue funcionando.
+No lo sustituyas por un `<button>` con JS ni por el truco del checkbox.
+
+`assets/js/menu.js` es solo comodidad: cierra el menú al tocar un enlace —los de
+`#precios` y `#contacto` no cambian de página, y sin él el menú seguiría tapando lo
+que se fue a ver—, al pulsar Escape y al tocar fuera.
 
 **El testimonio de Gabriela T. se queda en español, sin traducir**, con `lang="es"`.
 Es la misma regla que ya sigue la página española al dejar en inglés los otros tres:
@@ -450,9 +482,9 @@ sección, recorre la página entera y comprueba que sigan alternando.
 
 ## JavaScript: nada debe depender de él
 
-Los tres scripts de `assets/js/` son opcionales por diseño y esa propiedad hay que
-conservarla. El selector de idioma tampoco usa JavaScript, y por eso es un
-`<details>`; está explicado en su sección.
+Los cuatro scripts de `assets/js/` son opcionales por diseño y esa propiedad hay que
+conservarla. El selector de idioma y el menú plegable de móvil tampoco usan
+JavaScript, y por eso son `<details>`; está explicado en sus secciones.
 
 `assets/js/revelar.js` añade la clase `con-revelado` al `<html>` **solo cuando de
 verdad va a animar**. Todo el CSS que oculta elementos cuelga de esa clase, así que

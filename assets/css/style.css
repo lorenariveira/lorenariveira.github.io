@@ -182,7 +182,7 @@ p:last-child { margin-bottom: 0; }
   padding: .85rem 0;
 }
 
-.cabecera__inner .nav { justify-self: end; }
+.cabecera__inner .menu { justify-self: end; }
 
 .marca {
   font-family: var(--display);
@@ -206,6 +206,53 @@ p:last-child { margin-bottom: 0; }
   border-bottom: 2px solid transparent;
 }
 .nav a:hover { border-bottom-color: var(--terracota); }
+
+/* Menú de navegación ----------------------------------------------- */
+/* En móvil y tableta el menú se pliega tras el botón de tres rayas. Es un `<details>`
+   por lo mismo que el selector de idioma: abre y cierra sin JavaScript.
+   En pantalla ancha el botón se oculta y `::details-content` se fuerza a
+   visible, así que el menú se ve siempre aunque el `<details>` esté cerrado.
+   Un navegador que no conozca `::details-content` se salta ese bloque y
+   enseña el botón también en pantalla ancha: peor, pero sigue funcionando. */
+.menu__boton {
+  display: grid;
+  place-items: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  cursor: pointer;
+  list-style: none;
+  color: var(--tinta);
+  border: 1px solid var(--borde);
+  border-radius: 999px;
+  background: #fff;
+}
+
+.menu__boton::-webkit-details-marker { display: none; }
+
+.menu__boton:hover { border-color: var(--terracota); color: var(--terracota-o); }
+
+.menu__boton svg { width: 1.3rem; height: 1.3rem; }
+
+.menu__cerrar,
+.menu[open] .menu__abrir { display: none; }
+.menu[open] .menu__cerrar { display: block; }
+
+@media (width > 66rem) {
+  @supports selector(::details-content) {
+    .menu__boton { display: none; }
+    .menu::details-content { content-visibility: visible; }
+  }
+}
+
+/* Texto solo para lectores de pantalla, como la etiqueta del botón. */
+.oculto {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
 /* Selector de idioma ----------------------------------------------- */
 /* Es un `<details>` a propósito: abre y cierra sin JavaScript, así que
    cambiar de idioma sigue siendo posible con los scripts bloqueados.
@@ -864,6 +911,38 @@ p:last-child { margin-bottom: 0; }
 .pie__social:hover { color: var(--terracota); background: var(--crema-alt); }
 .pie__social svg { width: 1.5rem; height: 1.5rem; }
 
+/* Menú plegado: móvil y tableta ------------------------------------ */
+/* El corte no es el de móvil (46rem) sino 66rem: el menú de ordenador parte en
+   dos líneas hasta unos 1030 px en español y 980 px en inglés, lo que incluye
+   el iPad en horizontal. Si se alarga el texto de un enlace, vuelve a medirlo. */
+@media (max-width: 66rem) {
+  /* El menú abierto es una franja a todo el ancho bajo la cabecera. No hay
+     ningún elemento posicionado entre medias, así que el `absolute` se mide
+     contra `.cabecera`, que es `sticky`. */
+  .menu .nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
+    padding: .25rem 1.25rem .75rem;
+    background: var(--crema);
+    border-bottom: 1px solid var(--borde);
+    box-shadow: var(--sombra);
+  }
+  .menu .nav a {
+    width: 100%;
+    max-width: 24rem;
+    padding: .85rem 0;
+    text-align: center;
+    font-size: 1.05rem;
+    border-bottom: 1px solid var(--borde);
+  }
+  .menu .nav a:last-child { border-bottom: 0; }
+  .menu .nav a:hover { border-bottom-color: var(--borde); color: var(--terracota-o); }
+}
+
 /* Adaptación a móvil ----------------------------------------------- */
 @media (max-width: 46rem) {
   .portada__grid,
@@ -874,17 +953,33 @@ p:last-child { margin-bottom: 0; }
      viñeta del saludo se anclaría a la celda ancha y no a la cara. */
   .portada__retrato { max-width: 16rem; }
   .portada__entradilla { max-width: none; }
-  /* Una sola columna: marca, idioma y menú apilados y centrados. */
+  /* Una sola fila: la marca a la izquierda, y el idioma y el botón del menú
+     juntos a la derecha. El selector deja de ir centrado en la ventana
+     porque en móvil no cabe a la vez centrado y entero. */
   .cabecera__inner {
-    grid-template-columns: 1fr;
-    justify-items: center;
-    text-align: center;
-    gap: .75rem;
+    grid-template-columns: 1fr auto auto;
+    gap: .6rem;
   }
-  /* `justify-content` además de `justify-self`: sin él, cuando el menú
-     parte en dos líneas la segunda se queda pegada a la izquierda. */
-  .cabecera__inner .nav { justify-self: center; justify-content: center; }
+  .cabecera__inner .idiomas { justify-self: end; }
+
   .pie__inner { justify-content: center; text-align: center; }
+}
+
+/* Por debajo de 390 px no caben en una fila la marca, el selector con el
+   nombre del idioma y el botón del menú, y la marca partía en dos líneas.
+   El nombre se esconde a la vista pero no a los lectores de pantalla, y el
+   globo sigue diciendo «idioma» en cualquier lengua. A 320 px ni así cabía
+   el subtítulo de la marca: se le aprieta el espaciado entre letras. */
+@media (max-width: 24.35rem) {
+  .marca span { letter-spacing: .05em; white-space: nowrap; }
+  .idiomas__nombre {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
