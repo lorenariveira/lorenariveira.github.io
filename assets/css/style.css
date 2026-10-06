@@ -565,19 +565,12 @@ p:last-child { margin-bottom: 0; }
 
 .prueba p:last-child { color: var(--tinta-suave); margin: 0; }
 
-/* Dos tarjetas como mucho: con auto-fit y un mínimo alto no se parten en
-   tres columnas raquíticas si algún día se añade una tercera. */
-.precios {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-  gap: 1.5rem;
+/* Una sola tarjeta, del mismo ancho que la de la clase de prueba: sin cifra,
+   lleva el botón para pedir precio. Es fantasma para no competir con
+   «Reserva tu clase de prueba», que es la acción principal de la sección. */
+.precio {
   max-width: 46rem;
   margin-inline: auto;
-  list-style: none;
-  padding: 0;
-}
-
-.precio {
   background: #fff;
   border: 1px solid var(--borde);
   border-radius: var(--radio);
@@ -587,51 +580,18 @@ p:last-child { margin-bottom: 0; }
 }
 
 .precio__nombre {
-  font-weight: 600;
-  color: var(--tinta-suave);
-  font-size: .95rem;
-  margin-bottom: .5rem;
-}
-
-.precio__cifra {
   font-family: var(--display);
   font-weight: 600;
-  font-size: 2.1rem;
-  line-height: 1.1;
+  font-size: 1.15rem;
   color: var(--terracota-o);
   margin-bottom: .5rem;
 }
 
-/* La unidad no compite con la cifra: mismo color, tamaño de texto normal. */
-.precio__cifra span {
-  display: block;
-  font-family: var(--texto);
-  font-weight: 500;
-  font-size: .9rem;
-  color: var(--tinta-suave);
-  margin-top: .2rem;
-}
+.precio__nota { color: var(--tinta-suave); font-size: .95rem; margin: 0 0 1.25rem; }
 
-.precio__nota { color: var(--tinta-suave); font-size: .9rem; margin: 0; }
-
-/* La letra pequeña de las tarifas: va debajo de las dos tarjetas y con su
-   mismo ancho, para que se lea como nota de ambas y no de una sola. */
-.precios__aclaracion {
-  max-width: 46rem;
-  margin: 1.25rem auto 0;
-  font-size: .85rem;
-  line-height: 1.55;
-  color: var(--tinta-suave);
-  text-align: center;
-  text-wrap: pretty;
-}
-
-.datos--precios { margin-top: 2rem; }
-
-/* El botón cierra la sección, después de las cifras: quien lo pulsa ya sabe
-   lo que cuesta. Abre el correo con asunto y mensaje puestos; la salida para
-   quien no use correo es la sección de contacto, que va justo debajo, y por
-   eso el botón puede permitirse llevar a un solo canal. */
+/* El botón de reserva cierra la sección. Abre el correo con asunto y mensaje
+   puestos; la salida para quien no use correo es la sección de contacto, que
+   va justo debajo, y por eso el botón puede permitirse llevar a un solo canal. */
 .precios__accion { margin-top: 2.25rem; text-align: center; }
 
 /* Aparición al hacer scroll ---------------------------------------- */

@@ -28,11 +28,12 @@ El de correo lleva el asunto puesto:
 espacios van como `%20` y no como `+`: en un `mailto` el `+` es un signo más literal,
 no un espacio.
 
-**No es el único `mailto:` del sitio.** El botón «Reserva tu clase de prueba» de
-`clases.html` usa otro asunto, «Reserva de clase de prueba», y además lleva cuerpo.
-Los asuntos son distintos a propósito, para que en la bandeja de entrada se
-distinga quién viene a reservar de quién escribe por otra cosa. Si tocas uno,
-comprueba que el otro sigue teniendo sentido.
+**No es el único `mailto:` del sitio.** La sección de precios de `clases.html` tiene
+otros dos: «Reserva tu clase de prueba», con el asunto «Reserva de clase de prueba»
+y cuerpo, y «Consultar precios», con el asunto «Consulta de precios». Los asuntos
+son distintos a propósito, para que en la bandeja de entrada se distinga quién viene
+a reservar, quién pregunta el precio y quién escribe por otra cosa. Si tocas uno,
+comprueba que los otros siguen teniendo sentido.
 
 ### El enlace de WhatsApp no lleva el número
 
@@ -101,39 +102,32 @@ Para regenerarlas, pide el CSS a Google con un `User-Agent` de navegador moderno
 
 ## Precios y clase de prueba
 
-Publicados el 4 de agosto de 2026, en `clases.html` y **solo ahí** —y desde el 11 de
-agosto, en `en/lessons.html` y solo ahí—. Las portadas no llevan cifras: enlazan a
-`#precios` de la página de clases desde el menú, que está en las cuatro páginas. Es
-deliberado, para no tener el mismo número en más archivos de los necesarios, que hay
-que sincronizar a mano.
+**Desde el 6 de octubre de 2026 el sitio no publica ninguna tarifa.** Lorena quitó
+las cifras: las clases individuales ya no dicen «desde 45 € la hora» sino que llevan
+un botón «Consultar precios», y desaparecieron el paquete de 12 horas (480 €), la
+letra pequeña con `*` sobre las tarifas especiales y la lista de datos rápidos de la
+sección («Precios finales», «Todos los niveles», «Modalidad a convenir contigo»).
+**No las vuelvas a poner por tu cuenta**, ni en el HTML ni en el JSON-LD.
 
-Con la versión inglesa, **cada cifra vive ahora en cuatro sitios**: el HTML y el
-JSON-LD de `clases.html`, y el HTML y el JSON-LD de `en/lessons.html`. Cambiar un
-precio son cuatro ediciones, no dos.
+Lo que queda, en `clases.html` y su gemela `en/lessons.html`: la clase de prueba
+**gratuita de 20 minutos** (antes 30; entrevista de nivel y objetivos más una
+actividad oral breve), una sola tarjeta de clases individuales con la duración de la
+clase estándar, **hora y media**, y el botón de consultar precios, y el botón de
+reserva al final. El menú sigue diciendo «Precios» y el titular «Precios y clase de
+prueba»: es donde se pregunta el precio, aunque no se diga.
 
-Lo que se publica: clase de prueba **gratuita de 30 minutos** (entrevista de nivel y
-objetivos más una actividad oral breve), clases individuales **desde 45 € la hora**,
-**paquete de 12 horas por 480 € con pago por adelantado** y clase estándar de **hora
-y media**. Todos los niveles y modalidad a convenir.
+**La duración de la prueba está en seis sitios**: el texto visible y el cuerpo del
+`mailto:` de reserva de las dos páginas de clases, y la `description` de la oferta
+del JSON-LD, que va en las cuatro páginas. Si cambia, cámbiala en todos.
 
-La letra pequeña con `*` bajo las dos tarjetas acota que esas tarifas son de clases
-estándar: el idioma para negocios, el académico y el profesional van aparte y se
-consultan.
+«Consultar precios» es un `mailto:` con asunto «Consulta de precios» («Price
+enquiry» en inglés), sin cuerpo. Es `boton--fantasma` para no competir con «Reserva
+tu clase de prueba», que sigue siendo la acción principal de la sección.
 
-**El paquete no dice a cuánto sale la hora.** Hasta el 11 de agosto de 2026 la nota
-añadía «Sale a 40 € la hora» y Lorena la quitó, en las dos versiones. No la
-reintroduzcas por parecer más claro: quien quiera la cuenta la hace, y el 40 no
-está en ningún sitio más del sitio ni de los datos estructurados.
-
-**Cuidado al cambiar un precio: aparece en dos sitios del mismo archivo.** En el
-HTML visible y en el `offers` del JSON-LD. Si tocas uno y no el otro, el sitio le
-está diciendo a Google un precio distinto del que lee la persona. Los valores que
-tienen que coincidir son `minPrice` (45) y el `price` del paquete (480).
-
-**El botón «Reserva tu clase de prueba» va al final de la sección, después de las
-cifras, y no dentro del bloque de la clase de prueba.** Es decisión de Lorena y
-tiene su lógica: quien lo pulsa ya ha visto lo que cuesta, así que no llegan
-consultas de gente que se va en cuanto oye el precio.
+**El botón «Reserva tu clase de prueba» va al final de la sección, y no dentro del
+bloque de la clase de prueba.** Es decisión de Lorena del 4 de agosto de 2026, cuando
+iba después de las cifras para que quien lo pulsara ya supiera lo que cuesta. Ya no
+hay cifras, pero el sitio se mantiene.
 
 Abre un `mailto:` con asunto («Reserva de clase de prueba») y cuerpo ya escritos, no
 un salto a `#contacto`. La primera versión iba al ancla y era casi decorativa: la
@@ -146,10 +140,9 @@ debajo**, con su propio fondo y sus dos botones: quien no use correo sigue bajan
 encuentra WhatsApp. Si algún día esa sección deja de ir seguida de la de contacto,
 este botón vuelve a necesitar las dos vías.
 
-**Lorena decidió no mencionar el IVA ni el CRKBO por ahora**, y en su lugar la
-página dice "Precios finales". No lo cambies por iniciativa propia: la exención de
-BTW por el registro CRKBO es un argumento comercial fuerte, se le propuso con esos
-datos y prefirió dejarlo fuera de momento.
+**Lorena decidió no mencionar el IVA ni el CRKBO por ahora.** No lo añadas por
+iniciativa propia: la exención de BTW por el registro CRKBO es un argumento
+comercial fuerte, se le propuso con esos datos y prefirió dejarlo fuera de momento.
 
 **Los exámenes no se nombran.** Decidido el 11 de agosto de 2026: `clases.html`
 dice "exámenes internacionales" y así se queda. No lo conviertas en una lista de
@@ -184,10 +177,11 @@ Tampoco lleva `aggregateRating` ni `review` pese a haber cuatro testimonios real
 las valoraciones que se pone a sí mismo el propio negocio no dan resultados
 enriquecidos y es terreno resbaladizo.
 
-El nodo `Service` sí lleva `offers` desde que hay precios: la clase de prueba a 0 €,
-las individuales con `UnitPriceSpecification` y `minPrice` 45 por hora (`unitCode`
-`HUR`, que es «hora»), y el paquete de 12 horas a 480 €. Tienen que cuadrar con lo
-que se ve en la página; ver la sección de precios más arriba.
+El nodo `Service` lleva `offers` con **una sola oferta**: la clase de prueba a 0 €,
+con su duración en la `description`. Hasta el 6 de octubre de 2026 llevaba también
+las clases individuales (`minPrice` 45 por hora) y el paquete de 12 horas a 480 €;
+se quitaron con las cifras de la página, porque el JSON-LD no puede decirle a Google
+un precio que la persona no lee. Ver la sección de precios más arriba.
 
 ## Comandos
 
@@ -208,9 +202,9 @@ google-chrome-stable --headless --no-sandbox --hide-scrollbars \
 ```
 
 El alto de la ventana tiene que superar al de la página o la captura sale cortada
-por abajo sin avisar. Medidas a 390 px de ancho el 11 de agosto de 2026:
-`index.html` 3645, `clases.html` 5114, `en/index.html` 3573 y `en/lessons.html`
-4870. Pide 7000 y vas sobrado. Comprueba el número que devuelve el recorte: si
+por abajo sin avisar. Medidas a 390 px de ancho el 6 de octubre de 2026:
+`index.html` 3645, `clases.html` 4710, `en/index.html` 3573 y `en/lessons.html`
+4497. Pide 7000 y vas sobrado. Comprueba el número que devuelve el recorte: si
 coincide con el alto que pediste, casi seguro que se cortó.
 
 El recorte a la altura real del contenido se hace con ImageMagick:
@@ -276,10 +270,10 @@ partida del sitio. El bloque de JSON-LD viaja con `inLanguage` en `en`, las URL 
 Google entienda que es la misma persona y el mismo negocio, no dos.
 
 **Los asuntos de los `mailto:` están en inglés en las páginas inglesas** ("Contact
-from lorenariveira.com" y "Trial class booking"). No es un descuido: al visitante le
-llega el asunto en su idioma, y a Lorena le dice de qué versión del sitio viene
-quien escribe. Si cambias un asunto, son cuatro los que hay que revisar, dos por
-idioma.
+from lorenariveira.com", "Trial lesson booking" y "Price enquiry"). No es un
+descuido: al visitante le llega el asunto en su idioma, y a Lorena le dice de qué
+versión del sitio viene quien escribe. Si cambias un asunto, son seis los que hay
+que revisar, tres por idioma.
 
 ### El selector de idioma
 
@@ -373,7 +367,8 @@ posesivo. Es la clase de errata que en el sitio de una profesora de idiomas se p
 cara, así que revísalo cada vez que se toque este texto.
 
 Dos bloques los decidió ella directamente y no admiten reordenación por tu cuenta:
-toda la sección de precios de `clases.html`, y la lista de datos rápidos de su
+toda la sección de precios de `clases.html` (rehecha por ella el 6 de octubre de
+2026), y la lista de datos rápidos de su
 portada, que Lorena dejó así el 4 de agosto de 2026: enfoque
 comunicativo, programas personalizados, online y presencial, todos los niveles,
 profesora CELTA y más de 14 años de experiencia. El orden es intencionado —abre por
