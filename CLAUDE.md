@@ -161,8 +161,10 @@ tu clase de prueba» partían en dos líneas. Si alargas una etiqueta, vuelve a 
 clase de prueba», que sigue siendo la acción principal de la sección.
 
 **La lista de preguntas y la frase final de la tarjeta son borrador mío**, del 9 de
-octubre de 2026, y la versión inglesa entera también. Lorena cambió la entradilla y
-las etiquetas de la española.
+octubre de 2026, y la versión inglesa también salvo la entradilla. Lorena cambió la
+entradilla y las etiquetas de la española, y eligió la inglesa, «Drop me a message
+and let me know:», en lugar de «Write to me and tell me:», que era calco de
+«escríbeme y cuéntame» y sonaba a carta.
 
 **El botón «Reserva tu clase de prueba» va dentro de la tarjeta de la clase de
 prueba**, debajo de su descripción. Lo movió Lorena el 9 de octubre de 2026. Desde
