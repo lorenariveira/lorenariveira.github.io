@@ -28,9 +28,10 @@ El de correo lleva el asunto puesto:
 espacios van como `%20` y no como `+`: en un `mailto` el `+` es un signo más literal,
 no un espacio.
 
-**No es el único `mailto:` del sitio.** La sección de precios de `clases.html` tiene
-otros dos: «Reserva tu clase de prueba», con el asunto «Reserva de clase de prueba»
-y cuerpo, y «Consultar precios», con el asunto «Consulta de precios». Los asuntos
+**No es el único `mailto:` del sitio.** La sección de la clase de prueba de
+`clases.html` tiene otros dos: «Reserva tu clase de prueba», con el asunto «Reserva
+de clase de prueba» y cuerpo, y «Escríbeme por correo», el de pedir presupuesto, con el
+asunto «Consulta de precios» y un cuerpo con preguntas. Los asuntos
 son distintos a propósito, para que en la bandeja de entrada se distinga quién viene
 a reservar, quién pregunta el precio y quién escribe por otra cosa. Si tocas uno,
 comprueba que los otros siguen teniendo sentido.
@@ -103,31 +104,69 @@ Para regenerarlas, pide el CSS a Google con un `User-Agent` de navegador moderno
 ## Precios y clase de prueba
 
 **Desde el 6 de octubre de 2026 el sitio no publica ninguna tarifa.** Lorena quitó
-las cifras: las clases individuales ya no dicen «desde 45 € la hora» sino que llevan
-un botón «Consultar precios», y desaparecieron el paquete de 12 horas (480 €), la
+las cifras: las clases individuales ya no dicen «desde 45 € la hora» sino que invitan
+a pedir presupuesto, y desaparecieron el paquete de 12 horas (480 €), la
 letra pequeña con `*` sobre las tarifas especiales y la lista de datos rápidos de la
 sección («Precios finales», «Todos los niveles», «Modalidad a convenir contigo»).
 **No las vuelvas a poner por tu cuenta**, ni en el HTML ni en el JSON-LD.
 
 Lo que queda, en `clases.html` y su gemela `en/lessons.html`: la clase de prueba
 **gratuita de 20 minutos** (antes 30; entrevista de nivel y objetivos más una
-actividad oral breve), una sola tarjeta de clases individuales con la duración de la
-clase estándar, **hora y media**, y el botón de consultar precios, y el botón de
-reserva al final. El menú sigue diciendo «Precios» y el titular «Precios y clase de
-prueba»: es donde se pregunta el precio, aunque no se diga.
+actividad oral breve) con el botón de reserva dentro, y una sola tarjeta de clases
+individuales para pedir presupuesto. **La duración de la clase estándar, hora y
+media, ya no aparece en la página**: Lorena la quitó el 9 de octubre de 2026.
+
+**La sección no se llama «Precios».** Desde el 9 de octubre de 2026 el titular y el
+enlace del menú dicen **«Clase de prueba»** («Trial lesson» en inglés), y el ancla es
+`#prueba`. Hasta entonces seguían diciendo «Precios», y Lorena lo cambió porque
+titular «Precios» una sección sin cifras parece engañoso. Se buscó antes cómo lo
+hacen otros profesores y escuelas: quien titula «Precios», «Rates» o «Pricing» da
+alguna cifra, aunque sea un «desde», y quien no la da no usa esa palabra. Si algún
+día vuelven las cifras, el título puede volver con ellas; mientras no, no.
 
 **La duración de la prueba está en seis sitios**: el texto visible y el cuerpo del
 `mailto:` de reserva de las dos páginas de clases, y la `description` de la oferta
 del JSON-LD, que va en las cuatro páginas. Si cambia, cámbiala en todos.
 
-«Consultar precios» es un `mailto:` con asunto «Consulta de precios» («Price
-enquiry» en inglés), sin cuerpo. Es `boton--fantasma` para no competir con «Reserva
-tu clase de prueba», que sigue siendo la acción principal de la sección.
+### La tarjeta de clases individuales pide presupuesto
 
-**El botón «Reserva tu clase de prueba» va al final de la sección, y no dentro del
-bloque de la clase de prueba.** Es decisión de Lorena del 4 de agosto de 2026, cuando
-iba después de las cifras para que quien lo pulsara ya supiera lo que cuesta. Ya no
-hay cifras, pero el sitio se mantiene.
+Rehecha el 9 de octubre de 2026 a petición de Lorena: hasta entonces era un título,
+una línea y un botón «Consultar precios», y el texto quedaba descolgado. Ahora
+invita a pedir **un presupuesto a medida**, y para eso dice qué contarle: el idioma,
+el tipo de clase, el nivel y el objetivo, online o presencial, y cuántas horas a la
+semana y durante cuánto tiempo. Así Lorena recibe la consulta con lo que necesita
+para calcular el precio, en vez de un «¿cuánto cuesta?» suelto.
+
+Lleva **dos botones, correo y WhatsApp**, porque Lorena quiere que se le pueda
+preguntar por los dos canales:
+
+- **«Escríbeme por correo»** («Email me») abre un `mailto:` con el asunto «Consulta
+  de precios» («Price enquiry») y **un cuerpo con las mismas preguntas de la lista**,
+  cada una con su hueco, para que la persona solo tenga que rellenar.
+- **«Escríbeme por WhatsApp»** («Message me on WhatsApp») abre la conversación en blanco, como
+  todos: con el enlace `wa.me/qr/` no se puede dejar un mensaje escrito (ver la
+  sección de WhatsApp). Por eso la lista está en la página y no solo en el correo:
+  es lo único que le dice a quien escribe por WhatsApp qué contar.
+
+**Si cambias una pregunta de la lista, cámbiala también en el cuerpo del `mailto:`**,
+en las dos lenguas: son cuatro sitios.
+
+Las etiquetas «Escríbeme por…» son de Lorena, como la entradilla de la tarjeta
+(«Cada estudiante necesita algo distinto, escríbeme y cuéntame:»). Por debajo de
+24rem (384 px) los botones de las dos tarjetas llevan menos relleno y letra un poco
+más pequeña: a 320 px «Escríbeme por WhatsApp», «Message me on WhatsApp» y «Reserva
+tu clase de prueba» partían en dos líneas. Si alargas una etiqueta, vuelve a medir a
+320 px en las dos lenguas. Los dos botones son `boton--fantasma` para no competir con «Reserva tu
+clase de prueba», que sigue siendo la acción principal de la sección.
+
+**La lista de preguntas y la frase final de la tarjeta son borrador mío**, del 9 de
+octubre de 2026, y la versión inglesa entera también. Lorena cambió la entradilla y
+las etiquetas de la española.
+
+**El botón «Reserva tu clase de prueba» va dentro de la tarjeta de la clase de
+prueba**, debajo de su descripción. Lo movió Lorena el 9 de octubre de 2026. Desde
+el 4 de agosto iba al final de la sección, después de las cifras, para que quien lo
+pulsara ya supiera lo que cuesta; sin cifras, esa razón ya no existía.
 
 Abre un `mailto:` con asunto («Reserva de clase de prueba») y cuerpo ya escritos, no
 un salto a `#contacto`. La primera versión iba al ancla y era casi decorativa: la
@@ -135,10 +174,9 @@ sección de contacto está inmediatamente debajo, así que el botón solo hacía
 algo que ya se veía. Con el `mailto:` hace algo que la sección de abajo no puede,
 que es decir a qué viene la persona.
 
-Que apunte a un solo canal es asumible **precisamente porque el contacto está justo
-debajo**, con su propio fondo y sus dos botones: quien no use correo sigue bajando y
-encuentra WhatsApp. Si algún día esa sección deja de ir seguida de la de contacto,
-este botón vuelve a necesitar las dos vías.
+Que apunte a un solo canal es asumible porque WhatsApp está a la vista justo debajo,
+en la tarjeta del presupuesto, y otra vez en la sección de contacto que cierra la
+página.
 
 **Lorena decidió no mencionar el IVA ni el CRKBO por ahora.** No lo añadas por
 iniciativa propia: la exención de BTW por el registro CRKBO es un argumento
@@ -202,9 +240,9 @@ google-chrome-stable --headless --no-sandbox --hide-scrollbars \
 ```
 
 El alto de la ventana tiene que superar al de la página o la captura sale cortada
-por abajo sin avisar. Medidas a 390 px de ancho el 9 de octubre de 2026, con el menú
-plegable y la sección de precios sin cifras: `index.html` 3507, `clases.html` 4573,
-`en/index.html` 3480 y `en/lessons.html` 4404. Pide 7000 y vas sobrado. Comprueba el número que devuelve el recorte: si
+por abajo sin avisar. Medidas a 390 px de ancho el 9 de octubre de 2026, con la
+tarjeta de presupuesto: `index.html` 3507, `clases.html` 5015,
+`en/index.html` 3480 y `en/lessons.html` 4846. Pide 7000 y vas sobrado. Comprueba el número que devuelve el recorte: si
 coincide con el alto que pediste, casi seguro que se cortó.
 
 El recorte a la altura real del contenido se hace con ImageMagick:
@@ -260,7 +298,7 @@ está escrita a mano y vive en `/en/`, con los nombres de archivo en inglés
 —`/en/index.html` y `/en/lessons.html`— que es la única excepción acordada a la
 regla de nombrar los archivos en español: una URL la lee el visitante, no el código.
 **La excepción llega hasta ahí**: los `id`, las clases y las anclas siguen en
-español también en `/en/` (`#precios`, `#contacto`, `#contenido`), porque eso es
+español también en `/en/` (`#prueba`, `#contacto`, `#contenido`), porque eso es
 código y lo comparten las dos versiones a través de la misma hoja de estilos.
 
 Desde `/en/` los recursos se referencian como `../assets/`. Cada página lleva
@@ -304,16 +342,24 @@ en las dos lenguas: «English» y «Español» no miden lo mismo.
 
 ### El menú plegable de móvil
 
-Pedido por Lorena el 6 de octubre de 2026, para móvil y tableta. Hasta 66rem
-(1056 px) el menú se pliega tras un botón de tres rayas, que pasa a ser una X al
+Pedido por Lorena el 6 de octubre de 2026, para móvil y tableta. Hasta 70rem
+(1120 px) el menú se pliega tras un botón de tres rayas, que pasa a ser una X al
 abrirlo, y se despliega como una franja a todo el ancho bajo la cabecera. Por encima
 no cambia nada: el menú se ve como siempre.
 
-**El corte es 66rem y no el 46rem del resto del diseño móvil.** El menú de ordenador
-parte en dos líneas hasta unos 1030 px en español y 980 px en inglés —el iPad en
-horizontal mide 1024—, y el plegable está para que eso no pase. Si se alarga el
+**El corte es 70rem y no el 46rem del resto del diseño móvil.** El menú de ordenador
+parte en dos líneas hasta unos 1104 px en español y 1060 px en inglés —el iPad en
+horizontal mide 1024—, y el plegable está para que eso no pase. Era 66rem hasta el 9
+de octubre de 2026: «Clase de prueba» es más largo que el «Precios» de antes, y con
+la separación de entonces entre enlaces (1.75rem) el menú español no cabía en una
+línea a ningún ancho, porque la columna del menú la limita el ancho máximo del sitio
+(`--ancho`, 68rem), no la ventana. Se bajó la separación a 1rem, que deja unos 12 px
+de margen a ancho completo, y se subió el corte.
+
+**Ese margen es poco.** Cualquier texto más largo en el menú lo rompe a todos los
+anchos, no solo en los estrechos. Si se alarga el
 texto de un enlace del menú, vuelve a medir dónde parte: un `<iframe>` por ancho y
-contar cuántos `top` distintos tienen los enlaces de `.nav`. Entre 46 y 66rem la
+contar cuántos `top` distintos tienen los enlaces de `.nav`. Entre 46 y 70rem la
 cabecera mantiene la rejilla de ordenador, con el selector centrado y el botón a la
 derecha; por debajo de 46rem pasa a la fila de móvil.
 
@@ -325,7 +371,7 @@ conozca enseña el botón también en ordenador: peor, pero el menú sigue funci
 No lo sustituyas por un `<button>` con JS ni por el truco del checkbox.
 
 `assets/js/menu.js` es solo comodidad: cierra el menú al tocar un enlace —los de
-`#precios` y `#contacto` no cambian de página, y sin él el menú seguiría tapando lo
+`#prueba` y `#contacto` no cambian de página, y sin él el menú seguiría tapando lo
 que se fue a ver—, al pulsar Escape y al tocar fuera.
 
 **El testimonio de Gabriela T. se queda en español, sin traducir**, con `lang="es"`.

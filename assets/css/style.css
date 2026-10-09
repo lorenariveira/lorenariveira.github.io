@@ -195,7 +195,7 @@ p:last-child { margin-bottom: 0; }
 .marca span { display: block; font-family: var(--texto); font-size: .7rem; font-weight: 500;
   letter-spacing: .12em; text-transform: uppercase; color: var(--tinta-suave); }
 
-.nav { display: flex; align-items: center; gap: clamp(.9rem, 2.5vw, 1.75rem); flex-wrap: wrap; }
+.nav { display: flex; align-items: center; gap: clamp(.9rem, 2.5vw, 1rem); flex-wrap: wrap; }
 
 .nav a {
   color: var(--tinta);
@@ -237,7 +237,7 @@ p:last-child { margin-bottom: 0; }
 .menu[open] .menu__abrir { display: none; }
 .menu[open] .menu__cerrar { display: block; }
 
-@media (width > 66rem) {
+@media (width > 70rem) {
   @supports selector(::details-content) {
     .menu__boton { display: none; }
     .menu::details-content { content-visibility: visible; }
@@ -347,7 +347,7 @@ p:last-child { margin-bottom: 0; }
 .boton--fantasma { background: transparent; color: var(--terracota-o); }
 .boton--fantasma:hover { background: var(--terracota); color: #fff; }
 
-.boton svg { width: 1.05em; height: 1.05em; fill: currentColor; }
+.boton svg { flex: none; width: 1.05em; height: 1.05em; fill: currentColor; }
 
 /* Portada ---------------------------------------------------------- */
 .portada { padding: clamp(3rem, 8vw, 5.5rem) 0 clamp(2.5rem, 6vw, 4rem); }
@@ -610,18 +610,19 @@ p:last-child { margin-bottom: 0; }
   margin-bottom: .6rem;
 }
 
-.prueba p:last-child { color: var(--tinta-suave); margin: 0; }
+.prueba__texto { color: var(--tinta-suave); margin: 0; }
 
 /* Una sola tarjeta, del mismo ancho que la de la clase de prueba: sin cifra,
-   lleva el botón para pedir precio. Es fantasma para no competir con
-   «Reserva tu clase de prueba», que es la acción principal de la sección. */
+   invita a pedir presupuesto por correo o por WhatsApp. Los dos botones son
+   fantasma para no competir con «Reserva tu clase de prueba», que es la
+   acción principal de la sección. */
 .precio {
   max-width: 46rem;
   margin-inline: auto;
   background: #fff;
   border: 1px solid var(--borde);
   border-radius: var(--radio);
-  padding: 1.75rem;
+  padding: clamp(1.1rem, 5vw, 1.75rem);
   box-shadow: var(--sombra);
   text-align: center;
 }
@@ -634,12 +635,48 @@ p:last-child { margin-bottom: 0; }
   margin-bottom: .5rem;
 }
 
+.precio__intro { font-size: .95rem; margin: 0 0 1rem; }
+
+/* La lista va alineada a la izquierda dentro de la tarjeta centrada: son
+   frases largas y centradas se leen mal. Es lo que se pide que cuente quien
+   escribe, porque por WhatsApp no se puede dejar el mensaje escrito (ver
+   CLAUDE.md); el correo, en cambio, lleva las mismas preguntas en el cuerpo. */
+.precio__lista {
+  display: inline-grid;
+  gap: .45rem;
+  text-align: left;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.25rem;
+  font-size: .95rem;
+}
+.precio__lista li { display: flex; align-items: start; gap: .6rem; }
+.precio__lista li::before {
+  content: "";
+  flex: none;
+  width: .35rem;
+  height: .35rem;
+  margin-top: .55em;
+  border-radius: 50%;
+  background: var(--terracota);
+}
+
 .precio__nota { color: var(--tinta-suave); font-size: .95rem; margin: 0 0 1.25rem; }
 
-/* El botón de reserva cierra la sección. Abre el correo con asunto y mensaje
-   puestos; la salida para quien no use correo es la sección de contacto, que
-   va justo debajo, y por eso el botón puede permitirse llevar a un solo canal. */
-.precios__accion { margin-top: 2.25rem; text-align: center; }
+.precio__acciones { display: flex; flex-wrap: wrap; justify-content: center; gap: .75rem; }
+
+/* El botón de reserva va dentro de la tarjeta de la clase de prueba, justo
+   debajo de lo que describe. Abre el correo con asunto y mensaje puestos; la
+   salida para quien no use correo es la sección de contacto. */
+.prueba__accion { margin: 1.5rem 0 0; }
+
+/* Por debajo de 24rem (384 px) los botones de las dos tarjetas no caben en una
+   línea con el relleno de serie: «Escríbeme por WhatsApp», «Message me on
+   WhatsApp» y «Reserva tu clase de prueba» partían a 320 px. */
+@media (max-width: 24rem) {
+  .prueba, .precio { padding-inline: .75rem; }
+  .prueba .boton, .precio .boton { font-size: .9rem; padding-inline: .8rem; }
+}
 
 /* Aparición al hacer scroll ---------------------------------------- */
 /* La clase "con-revelado" la pone el JS: sin JavaScript nada se oculta. */
@@ -872,10 +909,10 @@ p:last-child { margin-bottom: 0; }
 .pie__social svg { width: 1.5rem; height: 1.5rem; }
 
 /* Menú plegado: móvil y tableta ------------------------------------ */
-/* El corte no es el de móvil (46rem) sino 66rem: el menú de ordenador parte en
-   dos líneas hasta unos 1030 px en español y 980 px en inglés, lo que incluye
+/* El corte no es el de móvil (46rem) sino 70rem: el menú de ordenador parte en
+   dos líneas hasta unos 1104 px en español y 1060 px en inglés, lo que incluye
    el iPad en horizontal. Si se alarga el texto de un enlace, vuelve a medirlo. */
-@media (max-width: 66rem) {
+@media (max-width: 70rem) {
   /* El menú abierto es una franja a todo el ancho bajo la cabecera. No hay
      ningún elemento posicionado entre medias, así que el `absolute` se mide
      contra `.cabecera`, que es `sticky`. */
