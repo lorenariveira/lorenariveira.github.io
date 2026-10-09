@@ -132,8 +132,8 @@ del JSON-LD, que va en las cuatro páginas. Si cambia, cámbiala en todos.
 
 Rehecha el 9 de octubre de 2026 a petición de Lorena: hasta entonces era un título,
 una línea y un botón «Consultar precios», y el texto quedaba descolgado. Ahora
-invita a pedir **un presupuesto a medida**, y para eso dice qué contarle: el idioma,
-el tipo de clase, el nivel y el objetivo, online o presencial, y cuántas horas a la
+invita a pedir **un presupuesto a medida**, y para eso dice qué contarle: el tipo de
+clase, el nivel y el objetivo, online o presencial, y cuántas horas a la
 semana y durante cuánto tiempo. Así Lorena recibe la consulta con lo que necesita
 para calcular el precio, en vez de un «¿cuánto cuesta?» suelto.
 
@@ -149,7 +149,8 @@ preguntar por los dos canales:
   es lo único que le dice a quien escribe por WhatsApp qué contar.
 
 **Si cambias una pregunta de la lista, cámbiala también en el cuerpo del `mailto:`**,
-en las dos lenguas: son cuatro sitios.
+en las dos lenguas: son cuatro sitios. **No se pregunta el idioma** que se quiere aprender: lo decidió
+Lorena el 9 de octubre de 2026, porque ya lo dice el idioma en que se lee la web.
 
 Las etiquetas «Escríbeme por…» son de Lorena, como la entradilla de la tarjeta
 («Cada estudiante necesita algo distinto, escríbeme y cuéntame:»). Por debajo de
@@ -241,8 +242,8 @@ google-chrome-stable --headless --no-sandbox --hide-scrollbars \
 
 El alto de la ventana tiene que superar al de la página o la captura sale cortada
 por abajo sin avisar. Medidas a 390 px de ancho el 9 de octubre de 2026, con la
-tarjeta de presupuesto: `index.html` 3507, `clases.html` 5015,
-`en/index.html` 3480 y `en/lessons.html` 4846. Pide 7000 y vas sobrado. Comprueba el número que devuelve el recorte: si
+tarjeta de presupuesto: `index.html` 3507, `clases.html` 4956,
+`en/index.html` 3480 y `en/lessons.html` 4787. Pide 7000 y vas sobrado. Comprueba el número que devuelve el recorte: si
 coincide con el alto que pediste, casi seguro que se cortó.
 
 El recorte a la altura real del contenido se hace con ImageMagick:
