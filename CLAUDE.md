@@ -23,6 +23,11 @@ cuatro páginas** —`index.html`, `clases.html`, `en/index.html` y `en/lessons.
 y **cualquier cambio en uno va en los otros en la misma tanda**: es donde ya se
 separaron una vez. Los dos llevan icono desde el 11 de agosto de 2026.
 
+Desde el 9 de octubre de 2026 las dos páginas de clases tienen **otra pareja de
+botones de correo y WhatsApp**, en la tarjeta de presupuesto. No son copia de estos:
+llevan otras etiquetas y otro `mailto:`, y están explicados en la sección de precios.
+El de WhatsApp usa el mismo enlace `wa.me/qr/`.
+
 El de correo lleva el asunto puesto:
 `mailto:info@lorenariveira.com?subject=Contacto%20desde%20lorenariveira.com`. Los
 espacios van como `%20` y no como `+`: en un `mailto` el `+` es un signo más literal,
@@ -192,7 +197,7 @@ siglas ni preguntes cuáles son para "completarlo".
 **Tampoco habrá una sección de preguntas frecuentes aparte.** Esa función ya la
 cumple `clases.html`, que es literalmente la página "¿Cómo son las clases?": si
 alguna vez hay una duda recurrente que responder, se responde ahí, en las tarjetas
-o en la sección de precios, no en un bloque nuevo de preguntas y respuestas.
+o en la sección de la clase de prueba, no en un bloque nuevo de preguntas y respuestas.
 
 ## Datos estructurados (JSON-LD)
 
@@ -448,8 +453,8 @@ posesivo. Es la clase de errata que en el sitio de una profesora de idiomas se p
 cara, así que revísalo cada vez que se toque este texto.
 
 Dos bloques los decidió ella directamente y no admiten reordenación por tu cuenta:
-toda la sección de precios de `clases.html` (rehecha por ella el 6 de octubre de
-2026), y la lista de datos rápidos de su
+toda la sección de la clase de prueba de `clases.html`, la antigua de precios
+(rehecha por ella el 6 y el 9 de octubre de 2026), y la lista de datos rápidos de su
 portada, que Lorena dejó así el 4 de agosto de 2026: enfoque
 comunicativo, programas personalizados, online y presencial, todos los niveles,
 profesora CELTA y más de 14 años de experiencia. El orden es intencionado —abre por
