@@ -587,6 +587,24 @@ lee: cantaría la respuesta antes de que el estudiante la piense. En
 teclado— con `aria-expanded`, y al girar se intercambia el `aria-hidden` de las dos
 caras y se anuncia la respuesta en una región `aria-live`.
 
+**`yo-tambien-a-mi-tambien.html` repite a propósito cinco frases de
+`yo-tambien-yo-tampoco.html`**, y les suma cinco con *gustar* y *encantar*. Lo pidió
+Lorena el 29 de octubre de 2026: la gracia es practicar a la vez la reacción
+(*también* o *tampoco*) y el tipo de verbo (*yo* o *a mí*). No quites las frases
+repetidas por parecer duplicadas.
+
+**Tiene tres opciones y solo una correcta**, barajadas: la buena, una con el otro
+sujeto y otra con la otra reacción. Así el comentario dice cuál de las dos cosas
+falló. La primera versión enseñaba las ocho combinaciones, con dos respuestas
+válidas según la opinión de cada uno, y Lorena la cambió el mismo día porque tantas
+opciones confundían.
+
+Seis frases piden estar de acuerdo y cuatro no (*yo no*, *yo sí*, *a mí sí*, *a mí
+no*). La opción con la otra reacción cambia también ↔ tampoco en las de acuerdo y
+sí ↔ no en las de desacuerdo, **nunca mezcla las dos**: así no hay dos válidas a la
+vez. **«—No tengo hijos. —Yo no.» es siempre incorrecto**, lo dijo Lorena, y es la
+trampa que lleva «Yo sí»; no lo trates como coloquialismo aceptable.
+
 `assets/js/actividad.js` es el motor de las actividades de huecos. Una actividad
 nueva es solo HTML: un `<form data-quiz>`, un `<input data-respuesta="...">` por
 hueco —varias respuestas válidas separadas por `|`— y un `<p data-aviso>` dentro de
